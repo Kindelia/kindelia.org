@@ -1,15 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+import EnQIne from "./EnQIne";
 
 // TODO: do this right
 if (window.location.href.indexOf("aprendiz") !== -1) {
   window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSfarRCmCVD0BGKbLiIi-WQozDmmlaLWy9TkfNWOdPNGUuVlag/viewform";
 }
 
-ReactDOM.render(
+const Main = 
   <div>
     <h2>
       Kindelia
@@ -32,7 +39,35 @@ ReactDOM.render(
         </a>
       </li>
     </ul>
-  </div>,
+  </div>;
+
+//function Box(x, y, w, h, fill=0) {
+  //var fill = ["white", "#D0D0D0", "black"][fill];
+  //return <Rect x={x} y={y} width={w} height={h} stroke="black" fill={fill}/>;
+//}
+
+//function Ex0() {
+  //return <Layer>
+    //<Text text="Hello manin"/>
+    //{Box(50, 50, 16, 16, 1)}
+  //</Layer>
+//}
+
+//function App() {
+  //return <Stage width="420" height="420"  style={{"border": "1px solid black"}}>
+    //<Ex0/>
+  //</Stage>;
+//}
+
+const Hello = <div>Ola</div>;
+
+ReactDOM.render(
+  <Router>
+    <Routes>
+      <Route path="/" element={Main}/>
+      <Route path="/test" element={<EnQIne/>}/>
+    </Routes>
+  </Router>,
   document.getElementById('root')
 );
 
