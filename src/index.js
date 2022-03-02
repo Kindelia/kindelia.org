@@ -1,15 +1,14 @@
 import './index.css';
-import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
+
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link
 } from "react-router-dom";
-import EnQIne from "./EnQIne";
+import EnQIne from "./pages/enqine/EnQIne";
 
 // TODO: do this right
 if (window.location.href.indexOf("aprendiz") !== -1) {
@@ -65,7 +64,7 @@ ReactDOM.render(
   <Router>
     <Routes>
       <Route path="/" element={Main}/>
-      <Route path="/test" element={<EnQIne/>}/>
+      <Route path="/enqine" element={<EnQIne/>}/>
     </Routes>
   </Router>,
   document.getElementById('root')
