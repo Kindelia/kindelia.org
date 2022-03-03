@@ -18,7 +18,8 @@ export default function LevelWrapper({whenAdvance, levelBuilder, id, email, time
           question: {
             id,
             correct,
-            timestamp: Number(new Date())
+            timestamp: Number(new Date()),
+            answer
           }
         }
       })
