@@ -21,7 +21,7 @@ export default function Enqine() {
   const [time, setTime] = useState('00:00');
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(0);
-  const TIME_LIMIT = 0.75 * 60 * 1000;
+  const TIME_LIMIT = 10 * 60 * 1000;
 
   function timer(startTime) {
     if (startTime === 0) {

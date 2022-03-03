@@ -62,17 +62,28 @@ export function board_mod_row_attr(attr, values, board) {
 }
 
 // receive an attr and a matrix of values
-// apply each value in each shape of the board
-// follow the order
-// 1 2 3
-// 4 5 6
-// 7 8 9
-export function board_mod_each_attr(attr, values, board) {
-  return board.map(
-    (row, i) => row.map(
-      (shape, j) => ({...shape, [attr]: values[i][j]})
-    )
-  )
+// if column_flow is false:
+//   apply each value in each shape of the board
+//   following the order
+//   1 2 3
+//   4 5 6
+//   7 8 9
+// else:
+//   apply each value in each shape of the board
+//   following the order
+//   1 4 7
+//   2 5 8
+//   3 6 9
+export function board_mod_each_attr(attr, values, [...board], column_flow = false) {
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      let row = column_flow ? j : i;
+      let col = column_flow ? i : j;
+      board[row][col] = {...board[row][col], [attr]: values[i][j]};
+    }
+  }
+
+  return board;
 }
 
 // puts an order in each row of the board
