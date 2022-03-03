@@ -1,10 +1,13 @@
-import axios from "../axios";
+import fetch from "../fetch";
 
 export default function End({email, endTime}) {
   if (!endTime || endTime === 0) {
-    axios.post('/candidate/end', {
-      email,
-      timestamp: Number(new Date())
+    fetch('/candidate/end', {
+      method: 'POST',
+      data: {
+        email,
+        timestamp: Number(new Date())
+      }
     });
   }
 

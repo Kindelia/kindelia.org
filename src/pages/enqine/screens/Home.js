@@ -1,26 +1,28 @@
 import { useState } from "react";
-import axios from "../axios";
+import fetch from "../fetch";
 
 export default function Home({whenAdvance, goToLevel, goToEnd, email, setEmail, setStartTime, setEndTime, timer}) {
   async function login() {
     try {
-      const res = await axios.post('/candidate/authenticate', {
-        email
+      const res = await fetch('/candidate/authenticate', {
+        method: 'POST',
+        data: { email }
       });
+      let data = await res.json();
       setShowError(false);
       // if candidate end the test go to end
-      if (res.data.endTime) {
-        setEndTime(res.data.endTime);
+      if (data.endTime) {
+        setEndTime(data.endTime);
         goToEnd();
       } else {
         // if candidate started the test go set startTime
-        if (res.data.startTime) {
-          setStartTime(res.data.startTime);
+        if (data.startTime) {
+          setStartTime(data.startTime);
         }
         // if candidate started the test go to the level were he was
-        if (res.data.lastQuestion !== null) {
-          timer(res.data.startTime);
-          goToLevel(res.data.lastQuestion + 1);
+        if (data.actualQuestion !== null) {
+          timer(data.startTime);
+          goToLevel(data.actualQuestion);
         }
         else whenAdvance();
       }

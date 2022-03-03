@@ -6,7 +6,6 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
-    "axios": "^0.26.0",
     "konva": "^8.3.2",
     "random-js-no-node": "^2.1.0-b",
     "react": "^17.0.2",

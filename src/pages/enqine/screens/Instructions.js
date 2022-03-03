@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "../axios";
+import fetch from "../fetch";
 import Level from "../components/Level";
 import train from "../levels/train";
 import { shape_empty } from "../utils/shape";
@@ -52,9 +52,12 @@ export function Instruction3({whenAdvance, timer, email, setStartTime}) {
   async function start() {
     const startTime = Number(new Date());
     setStartTime(startTime);
-    const res = await axios.post('candidate/start', {
-      email,
-      timestamp: startTime
+    const res = await fetch('/candidate/start', { 
+      method: 'POST',
+      data : {
+        email,
+        timestamp: startTime
+      }
     });
     timer();
     whenAdvance();

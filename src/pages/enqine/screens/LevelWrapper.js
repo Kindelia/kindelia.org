@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "../axios";
+import fetch from "../fetch";
 import Level from "../components/Level";
 import { shape_empty, shape_equal } from "../utils/shape";
 
@@ -11,12 +11,15 @@ export default function LevelWrapper({whenAdvance, levelBuilder, id, email, time
     const correct = shape_equal(answer, level[2][2]);
     
     try {
-      await axios.post('/candidate/question', {
-        email,
-        question: {
-          id,
-          correct,
-          timestamp: Number(new Date())
+      await fetch('/candidate/question', {
+        method: 'POST',
+        data: {
+          email,
+          question: {
+            id,
+            correct,
+            timestamp: Number(new Date())
+          }
         }
       })
       whenAdvance();
