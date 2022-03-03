@@ -1,3 +1,11 @@
+.enqine-app * {
+  font-family: 'Courier New', Courier, monospace
+}
+
+.enqine-app ul, ol {
+  list-style: none;
+}
+
 .enqine-app {
   display: flex;
   justify-content: center;
@@ -6,12 +14,14 @@
   min-height: max(100vh, 700px);
 
   font-size: 1.5rem;
-  text-align: center;
+
+  padding: 0 20px;
+  /* padding-top: 20px; */
 }
 
 .enqine-app h1 {
   font-family: monospace;
-  font-size: 5rem;
+  font-size: 2em;
   margin: 30px 0;
 }
 
@@ -22,7 +32,6 @@
 .enqine-app button {
   font-size: 1rem;
   padding: 10px 20px;
-  margin: 30px 0;
   border-radius: 10px;
   border: 2px solid black;
   background-color: white;
@@ -41,6 +50,94 @@
   margin-bottom: 5px;
 }
 
+.enqine-app input {
+  height: 30px;
+  border-radius: 10px;
+  outline: none;
+  border: 2px solid;
+  padding: 0 10px;
+  font-size: 1.2rem;
+  width: 250px;
+}
+
+.enqine-app label {
+  font-size: 1.2rem;
+  margin-right: 5px;
+  font-weight: 600;
+}
+
+.enqine-app .error {
+  color: red;
+  font-size: 1rem;
+}
+
+
 .enqine-app .bold {
   font-weight: bold;
+}
+
+/* CANVAS */
+.enqine-app canvas, 
+.enqine-app .canvas-wrapper, 
+.enqine-app .konvajs-content {
+  width: min(calc(100vw - 40px), 480px) !important;
+  height: min(calc(100vw - 40px), 480px) !important;
+}
+
+.enqine-app .canvas-wrapper {
+  margin: auto;
+}
+
+/* CANVAS BUTTONS */
+.enqine-app .canvas-buttons {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 0 4px;
+  width: min(100%, 480px);
+
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+  
+.enqine-app .canvas-buttons .pos-1 { grid-area: 1 / 1 / 2 / 3; }
+.enqine-app .canvas-buttons .pos-2 { grid-area: 1 / 3 / 2 / 6; }
+.enqine-app .canvas-buttons .pos-3 { grid-area: 1 / 6 / 2 / 9; }
+.enqine-app .canvas-buttons .pos-4 { grid-area: 2 / 1 / 3 / 3; }
+.enqine-app .canvas-buttons .pos-5 { grid-area: 4 / 1 / 5 / 3; }
+.enqine-app .canvas-buttons .pos-6 { grid-area: 3 / 5 / 4 / 6; }
+.enqine-app .canvas-buttons .pos-7 { grid-area: 4 / 5 / 5 / 6; }
+.enqine-app .canvas-buttons .pos-8 { grid-area: 4 / 4 / 5 / 5; }
+.enqine-app .canvas-buttons .pos-9 { grid-area: 4 / 3 / 5 / 4; }
+.enqine-app .canvas-buttons .pos-10 { grid-area: 3 / 3 / 4 / 4; }
+.enqine-app .canvas-buttons .pos-11 { grid-area: 2 / 3 / 3 / 4; }
+.enqine-app .canvas-buttons .pos-12 { grid-area: 2 / 4 / 3 / 5; }
+.enqine-app .canvas-buttons .pos-13 { grid-area: 2 / 5 / 3 / 6; }
+.enqine-app .canvas-buttons .pos-14 { grid-area: 3 / 8 / 4 / 9; }
+.enqine-app .canvas-buttons .pos-15 { grid-area: 4 / 8 / 5 / 9; }
+.enqine-app .canvas-buttons .pos-16 { grid-area: 4 / 7 / 5 / 8; }
+.enqine-app .canvas-buttons .pos-17 { grid-area: 4 / 6 / 5 / 7; }
+.enqine-app .canvas-buttons .pos-18 { grid-area: 3 / 6 / 4 / 7; }
+.enqine-app .canvas-buttons .pos-19 { grid-area: 2 / 6 / 3 / 7; }
+.enqine-app .canvas-buttons .pos-20 { grid-area: 2 / 7 / 3 / 8; }
+.enqine-app .canvas-buttons .pos-21 { grid-area: 2 / 8 / 3 / 9; }
+
+/* MOBILE */
+@media only screen and (max-width: 798px) {
+  .enqine-app {
+    font-size: 1rem;
+  }
+}
+
+/* HELPERS */
+.enqine-app .mt-5 {
+  margin-top: 5px !important;
+}
+.enqine-app .mt-30 {
+  margin-top: 30px !important;
+}
+.enqine-app .mb-30 {
+  margin-bottom: 30px !important;
 }

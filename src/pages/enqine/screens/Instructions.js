@@ -9,7 +9,7 @@ function Instruction({content, whenAdvance, buttonText}) {
     <>
       <h1>Instructions</h1>
       {content}
-      <button onClick={whenAdvance}>{buttonText || "Advance"}</button>
+      <button className="mt-30 mb-30" onClick={whenAdvance}>{buttonText || "Advance"}</button>
     </>
   );
 }
@@ -37,11 +37,15 @@ export function Instruction2({whenAdvance}) {
 
   const content = (
     <>
-      <p>Below is an example of a grid. Clearly the pattern is just repeat the row.</p>
-      <p>You can form the missing shape pressing the buttons below the grid. Try to solve it!</p>
+      <div>
+        <p>Below is an example of a grid. Clearly the pattern is just repeat the row.</p>
+        <p>You can form the missing shape pressing the buttons below the grid. Try to solve it!</p>
+      </div>
       <Level level={level} answer={answer} setAnswer={setAnswer} />
-      <p className='bold' style={{marginTop: '30px'}}>Try to click in every button more than once!</p>
-      <p className='bold'>You will have only this time to train!!! Click in advance only when you're ready!!!</p>
+      <div className="bold mt-30">
+        <p>Try to click in every button more than once! </p>
+        <p>You will have only this time to train! Click in advance only when you're ready!</p>
+      </div>
     </>
   );
 
@@ -67,11 +71,10 @@ export function Instruction3({whenAdvance, timer, email, setStartTime}) {
     <>
       <div>
         <ol>
-          <li>There are 30 levels.</li>
-          <li>You'll have 30 minutes to do them.</li>
-          <li>1 correct answer is equal to 1 point</li>
-          <li>Make sure your answer is correct, after advance a level you cannot go back.</li>
-          <li>After you click in the 'Start' button, a timer will begin and there is no going back.</li>
+          <li>1. There are 30 levels.</li>
+          <li>2. You'll have 30 minutes to do them.</li>
+          <li>3. Make sure your answer is correct, after advance a level you cannot go back.</li>
+          <li>4. After you click in the 'Start' button, a timer will begin and there is no going back.</li>
         </ol>
       </div>
     </>

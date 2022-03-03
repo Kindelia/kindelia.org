@@ -9,7 +9,7 @@ export default function LevelDebug({levelBuilder}) {
   return (
     <>
       <Level level={level} answer={answer} setAnswer={setAnswer} />
-      <button onClick={() => setLevel(levelBuilder())}>Refresh</button>
+      <button className="mt-30 mb-30" onClick={() => setLevel(levelBuilder())}>Refresh</button>
       <p>Answer is correct? { shape_equal(answer, level[2][2]) ? 'True' : 'False' }</p>
     </>
   );
