@@ -9,6 +9,7 @@ import {
   Link
 } from "react-router-dom";
 import EnQIne from "./pages/enqine/EnQIne";
+import Debug from './pages/enqine/Debug';
 
 // TODO: do this right
 if (window.location.href.indexOf("aprendiz") !== -1) {
@@ -65,6 +66,7 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={Main}/>
       <Route path="/enqine" element={<EnQIne/>}/>
+      <Route path="/enqine/debug" element={<Debug/>}/>
     </Routes>
   </Router>,
   document.getElementById('root')

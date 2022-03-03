@@ -9,6 +9,5 @@ export default function fetchAbsolute(url, {...options}, ...otherParams) {
     'Accept': 'application/json',
     'Content-Type': 'application/json;charset=UTF-8'
   }
-  console.log(options);
   return url.startsWith('/') ? fetch(BASE_URL + url, options, ...otherParams) : fetch(url, options, ...otherParams)
 }
