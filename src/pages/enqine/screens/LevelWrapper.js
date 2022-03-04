@@ -4,7 +4,7 @@ import Level from "../components/Level";
 import { shape_empty, shape_equal } from "../utils/shape";
 import { get_seed } from "../levels";
 
-export default function LevelWrapper({whenAdvance, levelBuilder, id, email, time}) {
+export default function LevelWrapper({whenAdvance, levelBuilder, id, user, time}) {
   let [seed, setSeed] = useState(get_seed())
   let [level, setLevel] = useState(levelBuilder(seed));
   let [answer, setAnswer] = useState(shape_empty());
@@ -13,16 +13,19 @@ export default function LevelWrapper({whenAdvance, levelBuilder, id, email, time
     const correct = shape_equal(answer, level[2][2]);
     
     try {
-      await fetch('/candidate/question', {
+      await fetch('/register', {
         method: 'POST',
         data: {
-          email,
-          question: {
-            id,
-            correct,
-            timestamp: Number(new Date()),
-            seed,
-            answer
+          timestamp: Number(new Date()),
+          user,
+          action: {
+            type: 'ANSWER',
+            data: {
+              id,
+              correct,
+              seed,
+              answer
+            }
           }
         }
       })
@@ -32,10 +35,27 @@ export default function LevelWrapper({whenAdvance, levelBuilder, id, email, time
     }
   }
 
-  function refresh() {
-    const new_seed = get_seed();
-    setSeed(new_seed);
-    setLevel(levelBuilder(new_seed));
+  async function refresh() {
+    try {
+      await fetch('/register', {
+        method: 'POST',
+        data: {
+          timestamp: Number(new Date()),
+          user,
+          action: {
+            type: 'REFRESH',
+            data: {
+              id
+            }
+          }
+        }
+      })
+      const new_seed = get_seed();
+      setSeed(new_seed);
+      setLevel(levelBuilder(new_seed));
+    } catch(err) {
+      console.log(err); // TODO
+    }
   }
 
   return (

@@ -52,15 +52,18 @@ export function Instruction2({whenAdvance}) {
   return <Instruction content={content} whenAdvance={whenAdvance} />
 }
 
-export function Instruction3({whenAdvance, timer, email, setStartTime}) {
+export function Instruction3({whenAdvance, timer, user, setStartTime}) {
   async function start() {
     const startTime = Number(new Date());
     setStartTime(startTime);
-    const res = await fetch('/candidate/start', { 
+    const res = fetch('/register', {
       method: 'POST',
-      data : {
-        email,
-        timestamp: startTime
+      data: {
+        timestamp: startTime,
+        user,
+        action: {
+          type: 'START',
+        }
       }
     });
     timer();

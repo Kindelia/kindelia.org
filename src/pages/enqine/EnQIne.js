@@ -17,7 +17,7 @@ import LevelWrapper from './screens/LevelWrapper';
 export default function Enqine() {
 
   const [screenNumber, setScreenNumber] = useState(0);
-  const [email, setEmail] = useState('');
+  const [user, setUser] = useState('');
   const [time, setTime] = useState('00:00');
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(0);
@@ -49,26 +49,26 @@ export default function Enqine() {
       whenAdvance={advance} 
       goToLevel={goToLevel}
       goToEnd={goToEnd}
-      email={email} 
-      setEmail={setEmail} 
+      user={user} 
+      setUser={setUser} 
       setStartTime={setStartTime} 
       setEndTime={setEndTime}
       timer={timer}
     />,
     <Instruction1 whenAdvance={advance}/>,
     <Instruction2 whenAdvance={advance}/>,
-    <Instruction3 whenAdvance={advance} timer={() => timer(startTime)} email={email} setStartTime={setStartTime} />,
+    <Instruction3 whenAdvance={advance} timer={() => timer(startTime)} user={user} setStartTime={setStartTime} />,
     ...Object.values(levels).map((levelBuilder, i) => 
       <LevelWrapper 
         key={i} 
         whenAdvance={advance} 
         levelBuilder={levelBuilder} 
         id={i} 
-        email={email}
+        user={user}
         time={time}
       />
     ),
-    <End email={email} endTime={endTime} />
+    <End user={user} endTime={endTime} />
   ];
 
   return (

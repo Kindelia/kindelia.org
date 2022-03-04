@@ -1,19 +1,29 @@
+import React from "react";
 import fetch from "../fetch";
 
-export default function End({email, endTime}) {
-  if (!endTime || endTime === 0) {
-    fetch('/candidate/end', {
+export default class End extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  async componentDidMount() {
+    await fetch('/register', {
       method: 'POST',
       data: {
-        email,
-        timestamp: Number(new Date())
+        user: this.props.user,
+        timestamp: Number(new Date()),
+        action: {
+          type: 'END'
+        }
       }
     });
   }
 
-  return (
-    <>
-      <h1>Thanks for Participate!</h1>
-    </>
-  );
+  render() {
+    return (
+      <>
+        <h1>Thanks for Participate!</h1>
+      </>
+    );
+  }
 }
