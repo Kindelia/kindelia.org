@@ -61,11 +61,17 @@ export default function Level({level, answer, setAnswer}) {
   }
 
   function wheel_button(i, txt) {
-    return button(16, 48, 48, answer.wheel[i] ? draw_dot(answer.wheel[i]) : "", () => {
-      var new_wheel = answer.wheel.slice(0);
-      new_wheel[i] = (new_wheel[i] + 1) % 4;
-      setAnswer({...answer, wheel: new_wheel});
-    });
+    if (i === null) {
+      return button(16, 48, 48, draw_dot(answer.center), () => {
+        setAnswer({...answer, center: (answer.center + 1) % 4});
+      });
+    } else {
+      return button(16, 48, 48, answer.wheel[i] ? draw_dot(answer.wheel[i]) : "", () => {
+        var new_wheel = answer.wheel.slice(0);
+        new_wheel[i] = (new_wheel[i] + 1) % 4;
+        setAnswer({...answer, wheel: new_wheel});
+      });
+    }
   }
 
   // FIXME TODO: improve this hardcoded monster
@@ -92,11 +98,6 @@ export default function Level({level, answer, setAnswer}) {
                 <tr>
                   <td>{button(22, 64, 64, draw_shape(answer.border), () => {
                     setAnswer({...answer, border: (answer.border + 1) % 4});
-                  })}</td>
-                </tr>
-                <tr>
-                  <td>{button(22, 64, 64, draw_dot(answer.center), () => {
-                    setAnswer({...answer, center: (answer.center + 1) % 4});
                   })}</td>
                 </tr>
               </tbody>
@@ -159,8 +160,8 @@ export default function Level({level, answer, setAnswer}) {
                   <td>
                     {wheel_button(4)}
                   </td>
-                  <td style={{"visibility":"hidden"}}>
-                    {button(16, 48, 48, "")}
+                  <td>
+                    {wheel_button(null)}
                   </td>
                   <td>
                     {wheel_button(0)}
@@ -234,13 +235,13 @@ function draw_board(key, x, y, rad, board) {
       elems = [...elems, (line(key+"_line_"+i, x0, y0, x1, y1))];
     }
     if (board.wheel[i]) {
-      elems = [...elems, (circle(key+"_dot_"+i, x0+x1, y0+y1, 8, board.wheel[i] - 1))];
+      elems = [...elems, (circle(key+"_dot_"+i, x0+x1, y0+y1, 10, board.wheel[i] - 1))];
     }
   }
 
   // Center circle
   if (board.center > 0) {
-    elems = [...elems, (circle(key+"_center_circle", x, y, rad*0.25, board.center - 1))];
+    elems = [...elems, (circle(key+"_center_circle", x, y, 10, board.center - 1))];
   }
 
   return elems;
