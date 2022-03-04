@@ -14,13 +14,14 @@ export default function Level({level, answer, setAnswer}) {
     }
   }
   
-  function button(font_size, w, h, content, click) {
+  function button(font_size, w, h, className, content, click) {
     return <button
+      className={className}
       onClick={() => click()}
       style={{
         "display": "block",
-        "width": w+"px",
-        "height": h+"px",
+        "width": `min(100%, ${w}px)`,
+        "height": `${w}px`,
         "fontSize": font_size+"px",
         "cursor": "pointer",
         padding: 0,
@@ -51,22 +52,30 @@ export default function Level({level, answer, setAnswer}) {
       case 1: return "⬤";
     }
   }
+  function draw_slash(state) {
+    switch (state % 4) {
+      case 0: return "-";
+      case 1: return "╲";
+      case 2: return "|";
+      case 3: return "⟋";
+    }
+  }
 
-  function clock_button(i, txt) {
-    return button(16, 48, 48, answer.clock[i] ? txt : "", () => {
+  function clock_button(i, className) {
+    return button(16, 48, 48, className, answer.clock[i] ? draw_slash(i) : "", () => {
       var new_clock = answer.clock.slice(0);
       new_clock[i] = (new_clock[i] + 1) % 2;
       setAnswer({...answer, clock: new_clock});
     });
   }
 
-  function wheel_button(i, txt) {
+  function wheel_button(i, className) {
     if (i === null) {
-      return button(16, 48, 48, draw_dot(answer.center), () => {
+      return button(16, 48, 48, className, draw_dot(answer.center), () => {
         setAnswer({...answer, center: (answer.center + 1) % 4});
       });
     } else {
-      return button(16, 48, 48, answer.wheel[i] ? draw_dot(answer.wheel[i]) : "", () => {
+      return button(16, 48, 48, className, answer.wheel[i] ? draw_dot(answer.wheel[i]) : "", () => {
         var new_wheel = answer.wheel.slice(0);
         new_wheel[i] = (new_wheel[i] + 1) % 4;
         setAnswer({...answer, wheel: new_wheel});
@@ -77,113 +86,40 @@ export default function Level({level, answer, setAnswer}) {
   // FIXME TODO: improve this hardcoded monster
   // Ei candidatos, temos aqui o exemplo de um código que vocês NÃO devem escrever
   return <div>
-    <Stage width={W} height={W}>
+    <Stage width={W} height={W} className="canvas-wrapper">
       <Layer>
         {elems}
       </Layer>
     </Stage>
-    <table style={{width:W+"px", "fontSize": "26px"}}>
-      <thead>
-        <tr style={{"fontWeight": "bold", "textAlign": "center"}}>
-          <td style={{"width": w+"px"}}>Shape</td>
-          <td style={{"width": w+"px"}}>Clock</td>
-          <td style={{"width": w+"px"}}>Wheel</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style={{"textAlign": "center"}}>
-          <td style={{"display": "flex", "flexFlow": "column nowrap", "justifyContent": "center", "alignItems": "center"}}>
-            <table>
-              <tbody>
-                <tr>
-                  <td>{button(22, 64, 64, draw_shape(answer.border), () => {
-                    setAnswer({...answer, border: (answer.border + 1) % 4});
-                  })}</td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-          <td>
-            <table>
-              <tbody>
-                <tr>
-                  <td>
-                    {clock_button(5, "╲")}
-                  </td>
-                  <td>
-                    {clock_button(6, "｜")}
-                  </td>
-                  <td>
-                    {clock_button(7, "⟋")}
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    {clock_button(4, "―")}
-                  </td>
-                  <td style={{"visibility":"hidden"}}>
-                    {button(16, 48, 48, "")}
-                  </td>
-                  <td>
-                    {clock_button(0, "―")}
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    {clock_button(3, "⟋")}
-                  </td>
-                  <td>
-                    {clock_button(2, "｜")}
-                  </td>
-                  <td>
-                    {clock_button(1, "╲")}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-          <td>
-            <table>
-              <tbody>
-                <tr>
-                  <td>
-                    {wheel_button(5)}
-                  </td>
-                  <td>
-                    {wheel_button(6)}
-                  </td>
-                  <td>
-                    {wheel_button(7)}
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    {wheel_button(4)}
-                  </td>
-                  <td>
-                    {wheel_button(null)}
-                  </td>
-                  <td>
-                    {wheel_button(0)}
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    {wheel_button(3)}
-                  </td>
-                  <td>
-                    {wheel_button(2)}
-                  </td>
-                  <td>
-                    {wheel_button(1)}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+    <div className="canvas-buttons">
+      <span style={{textAlign: 'center'}} className="bold pos-1">Shape</span>
+      <span style={{textAlign: 'center'}} className="bold pos-2">Clock</span>
+      <span style={{textAlign: 'center'}} className="bold pos-3">Wheel</span>
+
+      {/* BORDER */
+        button(22, 48, 48, "pos-4", draw_shape(answer.border), () => {
+          setAnswer({...answer, border: (answer.border + 1) % 4});
+        })
+      }
+      {/* CENTER */ 
+        button(22, 48, 48, "pos-5", draw_dot(answer.center), () => {
+          setAnswer({...answer, center: (answer.center + 1) % 4});
+        })
+      }
+      {/* CLOCK */
+        Array.from(
+          {length: 8},
+          (_, i) => clock_button(i, `pos-${i+6}`)
+        )
+      }
+      {/* WHEEL */
+        Array.from(
+          {length: 8},
+          (_, i) => wheel_button(i, `pos-${i+14}`)
+        )
+      }
+    </div>
   </div>;
 }
 

@@ -18,7 +18,8 @@ export default function LevelWrapper({whenAdvance, levelBuilder, id, email, time
           question: {
             id,
             correct,
-            timestamp: Number(new Date())
+            timestamp: Number(new Date()),
+            answer
           }
         }
       })
@@ -32,8 +33,8 @@ export default function LevelWrapper({whenAdvance, levelBuilder, id, email, time
     <>
       <p>{time}</p>
       <Level level={level} answer={answer} setAnswer={setAnswer} />
-      <p className='bold'>After advance you cannot go back!!!</p>
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <p className='bold mt-30'>After advance you cannot go back!</p>
+      <div className="mb-30" style={{display: 'flex', justifyContent: 'space-between'}}>
         <button onClick={() => setLevel(levelBuilder())}>Refresh</button>
         <button onClick={annotateResponse}>Advance</button>
       </div>  

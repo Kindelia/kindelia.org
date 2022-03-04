@@ -9,6 +9,7 @@ export default function Home({whenAdvance, goToLevel, goToEnd, email, setEmail, 
         data: { email }
       });
       let data = await res.json();
+      if (res.status !== 200) throw data.error;
       setShowError(false);
       // if candidate end the test go to end
       if (data.endTime) {
@@ -34,15 +35,15 @@ export default function Home({whenAdvance, goToLevel, goToEnd, email, setEmail, 
   const [showError, setShowError] = useState(false);
   return (
     <>
-      <h1>enQIne<small>v1.0</small></h1>
+      <h1>enQIne</h1>
       <div style={{display: 'flex', flexDirection: 'column'}}>
         <div>
-          <label htmlFor='email'>Email:</label>
+          <label htmlFor='email'>Email</label>
           <input type='email' name='email' onChange={e => setEmail(e.target.value)}></input>
         </div>
-        {showError && <span>Could not authenticate this email.</span>}
+        {showError && <span className="error mt-5 bold">Could not authenticate this email.</span>}
       </div>
-      <button onClick={login}>Start</button>
+      <button className="mt-30" onClick={login}>Start</button>
     </>
   );
 }
