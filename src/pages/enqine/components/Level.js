@@ -103,9 +103,7 @@ export default function Level({level, answer, setAnswer}) {
         })
       }
       {/* CENTER */ 
-        button(22, 48, 48, "pos-5", draw_dot(answer.center), () => {
-          setAnswer({...answer, center: (answer.center + 1) % 4});
-        })
+        wheel_button(null, `pos-5`)
       }
       {/* CLOCK */
         Array.from(

@@ -106,7 +106,7 @@
 .enqine-app .canvas-buttons .pos-2 { grid-area: 1 / 3 / 2 / 6; }
 .enqine-app .canvas-buttons .pos-3 { grid-area: 1 / 6 / 2 / 9; }
 .enqine-app .canvas-buttons .pos-4 { grid-area: 2 / 1 / 3 / 3; }
-.enqine-app .canvas-buttons .pos-5 { grid-area: 4 / 1 / 5 / 3; }
+.enqine-app .canvas-buttons .pos-5 { grid-area: 3 / 7 / 4 / 8; }
 .enqine-app .canvas-buttons .pos-6 { grid-area: 3 / 5 / 4 / 6; place-self: flex-start;}
 .enqine-app .canvas-buttons .pos-7 { grid-area: 4 / 5 / 5 / 6; place-self: flex-start;}
 .enqine-app .canvas-buttons .pos-8 { grid-area: 4 / 4 / 5 / 5; }
