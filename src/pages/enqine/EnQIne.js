@@ -7,7 +7,7 @@
 
 import './EnQIne.css';
 import React, { useState } from 'react';
-import { levels } from './levels/all';
+import { levels } from "./levels";
 import {fmtNumber} from './utils/fmt';
 import Home from './screens/Home';
 import End from './screens/End';
@@ -58,7 +58,7 @@ export default function Enqine() {
     <Instruction1 whenAdvance={advance}/>,
     <Instruction2 whenAdvance={advance}/>,
     <Instruction3 whenAdvance={advance} timer={() => timer(startTime)} email={email} setStartTime={setStartTime} />,
-    ...levels.map((levelBuilder, i) => 
+    ...Object.values(levels).map((levelBuilder, i) => 
       <LevelWrapper 
         key={i} 
         whenAdvance={advance} 
