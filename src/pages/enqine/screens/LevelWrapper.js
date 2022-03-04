@@ -34,7 +34,6 @@ export default function LevelWrapper({whenAdvance, levelBuilder, id, email, time
 
   function refresh() {
     const new_seed = get_seed();
-    console.log(new_seed);
     setSeed(new_seed);
     setLevel(levelBuilder(new_seed));
   }

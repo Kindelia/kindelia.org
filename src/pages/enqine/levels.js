@@ -118,7 +118,6 @@ function level(randoms, draw) {
       for (var n = 0; n < randoms.length; ++n) {
         for (var t = 0; t < 64; ++t) {
           var [seed, rnd] = random(seed, randoms[n]);
-          console.log(rnd);
           if (seen[n+"-"+rnd] === undefined) {
             line_rnds.push(rnd);
             seen[n+"-"+rnd] = 1;
@@ -128,7 +127,6 @@ function level(randoms, draw) {
       }
       rnds.push(line_rnds);
     }
-    console.log("?", JSON.stringify(rnds));
 
     var board = [];
     for (var y = 0; y < 3; ++y) {
