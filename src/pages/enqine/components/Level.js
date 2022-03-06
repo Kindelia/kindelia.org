@@ -14,8 +14,9 @@ export default function Level({level, answer, setAnswer}) {
     }
   }
   
-  function button(font_size, w, h, className, content, click) {
+  function button(font_size, w, h, className, content, click, key) {
     return <button
+      key={key}
       className={className}
       onClick={() => click()}
       style={{
@@ -61,25 +62,25 @@ export default function Level({level, answer, setAnswer}) {
     }
   }
 
-  function clock_button(i, className) {
+  function clock_button(i, className, key) {
     return button(16, 48, 48, className, answer.clock[i] ? draw_slash(i) : "", () => {
       var new_clock = answer.clock.slice(0);
       new_clock[i] = (new_clock[i] + 1) % 2;
       setAnswer({...answer, clock: new_clock});
-    });
+    }, key);
   }
 
-  function wheel_button(i, className) {
+  function wheel_button(i, className, key) {
     if (i === null) {
       return button(16, 48, 48, className, draw_dot(answer.center), () => {
         setAnswer({...answer, center: (answer.center + 1) % 4});
-      });
+      }, key);
     } else {
       return button(16, 48, 48, className, answer.wheel[i] ? draw_dot(answer.wheel[i]) : "", () => {
         var new_wheel = answer.wheel.slice(0);
         new_wheel[i] = (new_wheel[i] + 1) % 4;
         setAnswer({...answer, wheel: new_wheel});
-      });
+      }, key);
     }
   }
 
@@ -100,21 +101,21 @@ export default function Level({level, answer, setAnswer}) {
       {/* BORDER */
         button(22, 48, 48, "pos-4", draw_shape(answer.border), () => {
           setAnswer({...answer, border: (answer.border + 1) % 4});
-        })
+        }, 4)
       }
       {/* CENTER */ 
-        wheel_button(null, `pos-5`)
+        wheel_button(null, `pos-5`, 5)
       }
       {/* CLOCK */
         Array.from(
           {length: 8},
-          (_, i) => clock_button(i, `pos-${i+6}`)
+          (_, i) => clock_button(i, `pos-${i+6}`, i+6)
         )
       }
       {/* WHEEL */
         Array.from(
           {length: 8},
-          (_, i) => wheel_button(i, `pos-${i+14}`)
+          (_, i) => wheel_button(i, `pos-${i+14}`, i+14)
         )
       }
     </div>

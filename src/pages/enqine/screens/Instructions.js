@@ -3,6 +3,7 @@ import fetch from "../fetch";
 import Level from "../components/Level";
 import train from "../levels/train";
 import { shape_empty } from "../utils/shape";
+import { storageSetStart } from "../utils/storage";
 
 function Instruction({content, whenAdvance, buttonText}) {
   return (
@@ -52,9 +53,10 @@ export function Instruction2({whenAdvance}) {
   return <Instruction content={content} whenAdvance={whenAdvance} />
 }
 
-export function Instruction3({whenAdvance, timer, user, setStartTime}) {
-  async function start() {
+export function Instruction3({whenAdvance, user, setStartTime}) {
+  function start() {
     const startTime = Number(new Date());
+    storageSetStart(user, startTime);
     setStartTime(startTime);
     const res = fetch('/register', {
       method: 'POST',
@@ -66,7 +68,6 @@ export function Instruction3({whenAdvance, timer, user, setStartTime}) {
         }
       }
     });
-    timer();
     whenAdvance();
   }
 

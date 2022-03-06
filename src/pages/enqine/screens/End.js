@@ -1,22 +1,25 @@
 import React from "react";
 import fetch from "../fetch";
+import { storageSetEnd } from "../utils/storage";
 
 export default class End extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  async componentDidMount() {
-    await fetch('/register', {
+  componentDidMount() {
+    const endTime = Number(new Date());
+    fetch('/register', {
       method: 'POST',
       data: {
         user: this.props.user,
-        timestamp: Number(new Date()),
+        timestamp: endTime,
         action: {
           type: 'END'
         }
       }
     });
+    storageSetEnd(this.props.user, endTime);
   }
 
   render() {

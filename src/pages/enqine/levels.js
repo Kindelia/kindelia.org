@@ -155,7 +155,6 @@ export const levels = {
   }),
   // Find the image that is missing
   missing_shape: level([3], (image, x, y, r) => {
-    // console.log(r);
     border(image, 1 + mod(r[0] + x, 3));
   }),
   // Draw the same shape and the missing center

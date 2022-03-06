@@ -6,9 +6,8 @@
 // - Make all levels :)
 
 import './EnQIne.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { levels } from "./levels";
-import {fmtNumber} from './utils/fmt';
 import Home from './screens/Home';
 import End from './screens/End';
 import { Instruction1, Instruction2, Instruction3 } from './screens/Instructions';
@@ -18,27 +17,24 @@ export default function Enqine() {
 
   const [screenNumber, setScreenNumber] = useState(0);
   const [user, setUser] = useState('');
-  const [time, setTime] = useState('00:00');
+  const [time, setTime] = useState(0);
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(0);
-  const TIME_LIMIT = 10 * 60 * 1000;
 
-  function timer(startTime) {
-    if (startTime === 0) {
-      startTime = Number(new Date())
-    };
-    const i = setInterval(() => {
-      const now = Number(new Date());
-      const diff = now - startTime;
-      const min = fmtNumber(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)));
-      const sec = fmtNumber(Math.floor((diff % (1000 * 60)) / 1000));
-      setTime(`${min}:${sec}`);
-      if (diff >= TIME_LIMIT) { // 30min
-        clearInterval(i);
-        goToEnd();
-      }
-    }, 1000);
-  }
+  // function timer(startTime) {
+  //   startTime = Number(new Date())
+  //   const i = setInterval(() => {
+  //     const now = Number(new Date());
+  //     const diff = now - startTime;
+  //     if (diff >= TIME_LIMIT) { // 30min
+  //       clearInterval(i);
+  //       advance();
+  //     }
+  //     const min = fmtNumber(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)));
+  //     const sec = fmtNumber(Math.floor((diff % (1000 * 60)) / 1000));
+  //     setTime(`${min}:${sec}`);
+  //   }, 1000);
+  // }
 
   const advance = () => {setScreenNumber(screenNumber + 1)};
   const goToLevel = (i) => {setScreenNumber(4 + i)};
@@ -53,11 +49,10 @@ export default function Enqine() {
       setUser={setUser} 
       setStartTime={setStartTime} 
       setEndTime={setEndTime}
-      timer={timer}
     />,
     <Instruction1 whenAdvance={advance}/>,
     <Instruction2 whenAdvance={advance}/>,
-    <Instruction3 whenAdvance={advance} timer={() => timer(startTime)} user={user} setStartTime={setStartTime} />,
+    <Instruction3 whenAdvance={advance} user={user} setStartTime={setStartTime} />,
     ...Object.values(levels).map((levelBuilder, i) => 
       <LevelWrapper 
         key={i} 
@@ -65,7 +60,6 @@ export default function Enqine() {
         levelBuilder={levelBuilder} 
         id={i} 
         user={user}
-        time={time}
       />
     ),
     <End user={user} endTime={endTime} />
