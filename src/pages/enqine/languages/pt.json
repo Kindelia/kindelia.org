@@ -1,0 +1,44 @@
+{
+  "home": {
+    "user": "Usuário"
+  },
+  "button": {
+    "advance": "Avançar",
+    "start": "Começar"
+  },
+  "instructions": {
+    "title": "Instruções",
+    "1": {
+      "items": [
+        "1. Isto é uma engine de testes de QI.",
+        "2. Assim como testes de QI normais um grid 3x3 será mostrado com o último item faltando.",
+        "3. Sua tarefa é encontrar o padrão da grid e descobrir qual o formato do item faltando."
+      ],
+      "advance": "Avance para ver um exemplo"
+    },
+    "2": {
+      "header": [
+        "Abaixo tem um exemplo de grid. Claramente o padrão é somente repetir o que está na linha.",
+        "Você pode formar o item faltando clicando nos botões abaixo do grid. Tente resolver!"
+      ],
+      "footer": [
+        "Tente clicar em cada botão mais de uma vez!",
+        "Você terá somente esta vez para treinar. Clique em avançar somente quando estiver pronto!"
+      ]
+    },
+    "3": [
+      "1. Serão 30 leveis.",
+      "2. Você terá 1 minuto para resolver cada questão.",
+      "3. Tenha certeza de que sua resposta está correta. Depois de avançar uma questão não é possível retornar.",
+      "4. Após clicar no botão 'Começar', um cronômetro começará a contar seu tempo e não há mais volta."
+    ]
+  },
+  "level": {
+    "warning": "Depois de avançar você não pode retornar!",
+    "refresh": "Recarregar",
+    "wheel": "Círculos",
+    "clock": "Traços",
+    "shape": "Forma"
+  },
+  "end": "Obrigado por participar!"
+}

@@ -5,73 +5,73 @@
 // - Answer submission and score
 // - Make all levels :)
 
-import './EnQIne.css';
-import React, { useState, useEffect } from 'react';
+import "./EnQIne.css";
+import React, { useState, createContext } from "react";
 import { levels } from "./levels";
-import Home from './screens/Home';
-import End from './screens/End';
-import { Instruction1, Instruction2, Instruction3 } from './screens/Instructions';
-import LevelWrapper from './screens/LevelWrapper';
+import Home from "./screens/Home";
+import End from "./screens/End";
+import {
+  Instruction1,
+  Instruction2,
+  Instruction3,
+} from "./screens/Instructions";
+import LevelWrapper from "./screens/LevelWrapper";
+import { LanguageProvider, LanguageSelector } from "./languages/index.js";
 
 export default function Enqine() {
-
   const [screenNumber, setScreenNumber] = useState(0);
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState("");
   const [time, setTime] = useState(0);
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(0);
+  const [language, setLanguage] = useState("pt-BR");
 
-  // function timer(startTime) {
-  //   startTime = Number(new Date())
-  //   const i = setInterval(() => {
-  //     const now = Number(new Date());
-  //     const diff = now - startTime;
-  //     if (diff >= TIME_LIMIT) { // 30min
-  //       clearInterval(i);
-  //       advance();
-  //     }
-  //     const min = fmtNumber(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)));
-  //     const sec = fmtNumber(Math.floor((diff % (1000 * 60)) / 1000));
-  //     setTime(`${min}:${sec}`);
-  //   }, 1000);
-  // }
-
-  const advance = () => {setScreenNumber(screenNumber + 1)};
-  const goToLevel = (i) => {setScreenNumber(4 + i)};
-  const goToEnd = () => {setScreenNumber(screens.length - 1)};
+  const advance = () => {
+    setScreenNumber(screenNumber + 1);
+  };
+  const goToLevel = (i) => {
+    setScreenNumber(4 + i);
+  };
+  const goToEnd = () => {
+    setScreenNumber(screens.length - 1);
+  };
 
   const screens = [
-    <Home 
-      whenAdvance={advance} 
+    <Home
+      whenAdvance={advance}
       goToLevel={goToLevel}
       goToEnd={goToEnd}
-      user={user} 
-      setUser={setUser} 
-      setStartTime={setStartTime} 
+      user={user}
+      setUser={setUser}
+      setStartTime={setStartTime}
       setEndTime={setEndTime}
     />,
-    <Instruction1 whenAdvance={advance}/>,
-    <Instruction2 whenAdvance={advance}/>,
-    <Instruction3 whenAdvance={advance} user={user} setStartTime={setStartTime} />,
-    ...Object.values(levels).map((levelBuilder, i) => 
-      <LevelWrapper 
-        key={i} 
-        whenAdvance={advance} 
-        levelBuilder={levelBuilder} 
-        id={i} 
+    <Instruction1 whenAdvance={advance} />,
+    <Instruction2 whenAdvance={advance} />,
+    <Instruction3
+      whenAdvance={advance}
+      user={user}
+      setStartTime={setStartTime}
+    />,
+    ...Object.values(levels).map((levelBuilder, i) => (
+      <LevelWrapper
+        key={i}
+        whenAdvance={advance}
+        levelBuilder={levelBuilder}
+        id={i}
         user={user}
       />
-    ),
-    <End user={user} endTime={endTime} />
+    )),
+    <End user={user} endTime={endTime} />,
   ];
 
   return (
-    <main className='enqine-app'>
-      {screens[screenNumber]}
-    </main>
+    <LanguageProvider>
+      <LanguageSelector></LanguageSelector>
+      <main className="enqine-app">{screens[screenNumber]}</main>
+    </LanguageProvider>
   );
 }
-
 
 // type Color
 //   = None

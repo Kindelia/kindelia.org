@@ -1,0 +1,61 @@
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: #f6f3ef;
+
+  min-height: max(100vh, 700px);
+
+  font-family: "Courier New", Courier, monospace;
+}
+
+.main-title {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.main-social {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.main-social > * + * {
+  margin-left: 20px;
+}
+
+.main-icon {
+  width: 32px;
+  height: 32px;
+  color: white;
+  text-decoration: none;
+}
+
+.main-title::after {
+  content: "_";
+  font-family: Impact, sans-serif;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-left {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { LanguageContext } from "../languages";
 import { getStorage, storageSetUser } from "../utils/storage";
 // import fetch from "../fetch";
 
 export default function Home({whenAdvance, goToLevel, goToEnd, user, setUser, setStartTime, setEndTime}) {
+
+  const language = useContext(LanguageContext).dictionary;
+
   async function login() {
     try {
       const reboot = getStorage();
@@ -31,12 +35,12 @@ export default function Home({whenAdvance, goToLevel, goToEnd, user, setUser, se
       <h1>enQIne</h1>
       <div style={{display: 'flex', flexDirection: 'column'}}>
         <div>
-          <label htmlFor='user'>User</label>
+          <label htmlFor='user'>{language.home.user}</label>
           <input type='user' name='user' onChange={e => setUser(e.target.value)}></input>
         </div>
         {showError && <span className="error mt-5 bold">Could not authenticate this user.</span>}
       </div>
-      <button className="mt-30" onClick={login}>Start</button>
+      <button className="mt-30" onClick={login}>{language.button.start}</button>
     </>
   );
 }

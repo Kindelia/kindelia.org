@@ -1,32 +1,28 @@
-import React from "react";
+import { useContext, useEffect } from "react";
 import fetch from "../fetch";
 import { storageSetEnd } from "../utils/storage";
-
-export default class End extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
+import { LanguageContext } from "../languages";
+export default function End({ user }) {
+  useEffect(() => {
     const endTime = Number(new Date());
-    fetch('/register', {
-      method: 'POST',
+    fetch("/register", {
+      method: "POST",
       data: {
-        user: this.props.user,
+        user: user,
         timestamp: endTime,
         action: {
-          type: 'END'
-        }
-      }
+          type: "END",
+        },
+      },
     });
-    storageSetEnd(this.props.user, endTime);
-  }
+    storageSetEnd(user, endTime);
+  }, []);
 
-  render() {
-    return (
-      <>
-        <h1>Thanks for Participate!</h1>
-      </>
-    );
-  }
+  const language = useContext(LanguageContext).dictionary;
+
+  return (
+    <>
+      <h1>{language.end}</h1>
+    </>
+  );
 }

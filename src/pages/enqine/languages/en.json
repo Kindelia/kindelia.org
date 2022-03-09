@@ -1,0 +1,44 @@
+{
+  "home": {
+    "user": "User"
+  },
+  "button": {
+    "advance": "Advance",
+    "start": "Start"
+  },
+  "instructions": {
+    "title": "Instructions",
+    "1": {
+      "items": [
+        "1. This is an IQ test engine.",
+        "2. Just like normal IQ tests a 3x3 grid will be shown with the last item missing.",
+        "3. Your task is to find the grid pattern and find out what shape the missing item has."
+      ],
+      "advance": "Advance to see an example"
+    },
+    "2": {
+      "header": [
+        "Below is an example grid. Clearly the pattern is just repeating what's on the line.",
+        "You can form the missing item by clicking the buttons below the grid. Try to solve it!"
+      ],
+      "footer": [
+        "Try clicking each button more than once!",
+        "You'll only have this one time to train. Click on advance only when you're ready!"
+      ]
+    },
+    "3": [
+      "1. There will be 30 levels.",
+      "2. You will have 1 minute to solve each question.",
+      "3. Make sure your answer is correct. Once you have advanced a question, it is not possible to return.",
+      "4. After clicking the 'Start' button, a timer will start and there is no going back."
+    ]
+  },
+  "level": {
+    "warning": "After advancing you cannot return!",
+    "refresh": "Refresh",
+    "wheel": "Wheel",
+    "clock": "Clock",
+    "shape": "Shape"
+  },
+  "end": "Thanks for participating!"
+}
