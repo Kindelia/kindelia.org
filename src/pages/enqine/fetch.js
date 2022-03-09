@@ -1,7 +1,4 @@
-const BASE_URL =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:8080"
-    : ""; // TODO add production url to backend
+const BASE_URL = process.env.REACT_APP_BACK_URL || "http://localhost:8080";
 export default function fetchAbsolute(url, { ...options }, ...otherParams) {
   if (options.data) {
     options.body = JSON.stringify({ ...options.data });
