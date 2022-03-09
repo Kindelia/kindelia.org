@@ -10,35 +10,35 @@
     "title": "Instruções",
     "1": {
       "items": [
-        "1. Isto é uma engine de testes de QI.",
-        "2. Assim como testes de QI normais um grid 3x3 será mostrado com o último item faltando.",
-        "3. Sua tarefa é encontrar o padrão da grid e descobrir qual o formato do item faltando."
+        "1. Esse é um teste visual de raciocínio.",
+        "2. Cada LINHA segue o mesmo padrão de evolucão.",
+        "3. Não existem padrões em colunas ou diagonais.",
+        "4. Seu objetivo é desenhar a imagem que falta na última linha."
       ],
-      "advance": "Avance para ver um exemplo"
+      "advance": "Clique 'Avançar' para ver um exemplo."
     },
     "2": {
       "header": [
-        "Abaixo tem um exemplo de grid. Claramente o padrão é somente repetir o que está na linha.",
-        "Você pode formar o item faltando clicando nos botões abaixo do grid. Tente resolver!"
+        "Pratique desenhando uma imagem qualquer."
       ],
       "footer": [
-        "Tente clicar em cada botão mais de uma vez!",
-        "Você terá somente esta vez para treinar. Clique em avançar somente quando estiver pronto!"
+        "Para desenhar, aperte os botões acima."
       ]
     },
     "3": [
-      "1. Serão 30 leveis.",
-      "2. Você terá 1 minuto para resolver cada questão.",
-      "3. Tenha certeza de que sua resposta está correta. Depois de avançar uma questão não é possível retornar.",
-      "4. Após clicar no botão 'Começar', um cronômetro começará a contar seu tempo e não há mais volta."
+      "1. Ao todo, serão 30 níveis.",
+      "2. Você terá 1 minuto para resolver cada nível.",
+      "3. Não é possível retornar depois de avançar.",
+      "4. Se receber um nível difícil, aperte 'Recarregar'.",
+      "5. Você pode recarregar quantas vezes quiser; abuse disso."
     ]
   },
   "level": {
-    "warning": "Depois de avançar você não pode retornar!",
+    "warning": "Depois de avançar, você não pode retornar!",
     "refresh": "Recarregar",
-    "wheel": "Círculos",
-    "clock": "Traços",
-    "shape": "Forma"
+    "wheel": "Pontos",
+    "clock": "Linhas",
+    "shape": "Borda"
   },
-  "end": "Obrigado por participar!"
+  "end": "Você concluiu o teste. Entraremos em contato nos próximos dias."
 }
