@@ -60,6 +60,7 @@ export default function Enqine() {
         levelBuilder={levelBuilder}
         id={i}
         user={user}
+        goToEnd={goToEnd}
       />
     )),
     <End user={user} endTime={endTime} />,

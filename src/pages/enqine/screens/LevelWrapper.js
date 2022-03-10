@@ -6,8 +6,9 @@ import { get_seed } from "../levels";
 import Timer from "../components/Timer";
 import { getStorage, storageAddActualQuestion } from "../utils/storage";
 import { LanguageContext } from "../languages";
+import throttle from "../utils/throttle";
 
-export default function LevelWrapper({ whenAdvance, levelBuilder, id, user }) {
+export default function LevelWrapper({ whenAdvance, levelBuilder, id, user, goToEnd }) {
   let [seed, setSeed] = useState(get_seed());
   let [level, setLevel] = useState(levelBuilder(seed));
   let [answer, setAnswer] = useState(shape_empty());
@@ -63,7 +64,11 @@ export default function LevelWrapper({ whenAdvance, levelBuilder, id, user }) {
           },
         },
       },
-    }).catch((err) => {}); // TODO
+    })
+      .then((res) => {
+        if (res.status === 429) goToEnd();
+      })
+      .catch((err) => {}); // TODO
     const new_seed = get_seed();
     setSeed(new_seed);
     setLevel(levelBuilder(new_seed));
@@ -80,12 +85,27 @@ export default function LevelWrapper({ whenAdvance, levelBuilder, id, user }) {
         max={60}
       >
         <Level level={level} answer={answer} setAnswer={setAnswer} />
-        <p className="bold mt-30">{language.level.warning}</p>
+        <p
+          className="bold mt-30"
+          style={{
+            position: "relative",
+            top: "-10px",
+          }}
+        >
+          {language.level.warning}
+        </p>
         <div
-          className="mb-30"
+          className="mb-30 mt-10"
           style={{ display: "flex", justifyContent: "space-between" }}
         >
-          <button onClick={refresh}>{language.level.refresh}</button>
+          <button
+            className="mr-10"
+            onClick={() => {
+              throttle(refresh, 100);
+            }}
+          >
+            {language.level.refresh}
+          </button>
           <button onClick={annotateResponse}>{language.button.advance}</button>
         </div>
       </Timer>

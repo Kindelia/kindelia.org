@@ -143,6 +143,15 @@
 .enqine-app .mb-30 {
   margin-bottom: 30px !important;
 }
+.enqine-app .mt-20 {
+  margin-top: 20px !important;
+}
 .enqine-app .mb-20 {
   margin-bottom: 20px !important;
+}
+.enqine-app .mt-10 {
+  margin-top: 10px;
+}
+.enqine-app .mr-10 {
+  margin-right: 10px;
 }
