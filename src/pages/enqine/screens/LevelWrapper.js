@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import fetch from "../fetch";
 import Level from "../components/Level";
 import { shape_empty, shape_equal } from "../utils/shape";
@@ -8,7 +8,13 @@ import { getStorage, storageAddActualQuestion } from "../utils/storage";
 import { LanguageContext } from "../languages";
 import throttle from "../utils/throttle";
 
-export default function LevelWrapper({ whenAdvance, levelBuilder, id, user, goToEnd }) {
+export default function LevelWrapper({
+  whenAdvance,
+  levelBuilder,
+  id,
+  user,
+  goToEnd,
+}) {
   let [seed, setSeed] = useState(get_seed());
   let [level, setLevel] = useState(levelBuilder(seed));
   let [answer, setAnswer] = useState(shape_empty());
