@@ -27,6 +27,12 @@ export function storageSetEnd(user, endTime) {
   storageSetItem('reboot', {...data, [user]: {...data[user], endTime}})
 }
 
+export function storageGetEnd(user) {
+  const data = getStorage();
+  if (data[user]) return data[user].endTime;
+  else return undefined;
+}
+
 export function storageAddActualQuestion(user, question) {
   const data = getStorage();
   storageSetItem('reboot', {...data, [user]: {...data[user], actualQuestion: question} })
