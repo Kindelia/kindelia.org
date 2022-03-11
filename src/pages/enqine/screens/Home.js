@@ -53,7 +53,14 @@ export default function Home({
     <>
       <h1>enQIne</h1>
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
           <label htmlFor="user">{language.home.user}</label>
           <input
             type="user"
