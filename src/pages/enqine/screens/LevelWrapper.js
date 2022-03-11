@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, useContext } from "react";
 import fetch from "../fetch";
 import Level from "../components/Level";
 import { shape_empty, shape_equal } from "../utils/shape";

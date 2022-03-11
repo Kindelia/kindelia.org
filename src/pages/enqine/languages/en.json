@@ -1,6 +1,7 @@
 {
   "home": {
-    "user": "User"
+    "user": "User",
+    "error": "Could not authenticate this user"
   },
   "button": {
     "advance": "Next",

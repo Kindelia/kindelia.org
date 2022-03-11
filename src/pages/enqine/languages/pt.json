@@ -1,6 +1,7 @@
 {
   "home": {
-    "user": "Usuário"
+    "user": "Usuário",
+    "error": "Não foi possível autenticar esse usuário"
   },
   "button": {
     "advance": "Avançar",

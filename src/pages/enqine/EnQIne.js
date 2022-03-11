@@ -6,7 +6,7 @@
 // - Make all levels :)
 
 import "./EnQIne.css";
-import React, { useState, createContext } from "react";
+import React, { useState } from "react";
 import { levels } from "./levels";
 import Home from "./screens/Home";
 import End from "./screens/End";
@@ -19,12 +19,11 @@ import LevelWrapper from "./screens/LevelWrapper";
 import { LanguageProvider, LanguageSelector } from "./languages/index.js";
 
 export default function Enqine() {
+  const auth = process.env.REACT_APP_AUTH === "true";
   const [screenNumber, setScreenNumber] = useState(0);
   const [user, setUser] = useState("");
-  const [time, setTime] = useState(0);
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(0);
-  const [language, setLanguage] = useState("pt-BR");
 
   const advance = () => {
     setScreenNumber(screenNumber + 1);
@@ -43,8 +42,7 @@ export default function Enqine() {
       goToEnd={goToEnd}
       user={user}
       setUser={setUser}
-      setStartTime={setStartTime}
-      setEndTime={setEndTime}
+      auth={auth}
     />,
     <Instruction1 whenAdvance={advance} />,
     <Instruction2 whenAdvance={advance} />,
