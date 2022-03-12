@@ -49,14 +49,14 @@ export function Instruction2({ whenAdvance }) {
   const content = (
     <>
       <div>
-        {language.instructions[2].header.map((item) => (
-          <p>{item}</p>
+        {language.instructions[2].header.map((item, i) => (
+          <p key={i}>{item}</p>
         ))}
       </div>
       <Level level={level} answer={answer} setAnswer={setAnswer} />
       <div className="bold mt-30">
-        {language.instructions[2].footer.map((item) => (
-          <p>{item}</p>
+        {language.instructions[2].footer.map((item, i) => (
+          <p key={i}>{item}</p>
         ))}
       </div>
     </>

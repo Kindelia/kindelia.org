@@ -10,6 +10,7 @@ export default function Level({ level, answer, setAnswer }) {
   var r = P * 4;
   var p = P * 5;
   var w = P * 10;
+  var B = window.innerWidth > 425 ? P * 3 : P * 2; 
   var elems = [];
   for (var y = 0; y < 3; ++y) {
     for (var x = 0; x < 3; ++x) {
@@ -89,8 +90,8 @@ export default function Level({ level, answer, setAnswer }) {
   function clock_button(i, className, key) {
     return button(
       16,
-      48,
-      48,
+      B,
+      B,
       className,
       answer.clock[i] ? draw_slash(i) : "",
       () => {
@@ -106,8 +107,8 @@ export default function Level({ level, answer, setAnswer }) {
     if (i === null) {
       return button(
         16,
-        48,
-        48,
+        B,
+        B,
         className,
         draw_dot(answer.center),
         () => {
@@ -118,8 +119,8 @@ export default function Level({ level, answer, setAnswer }) {
     } else {
       return button(
         16,
-        48,
-        48,
+        B,
+        B,
         className,
         answer.wheel[i] ? draw_dot(answer.wheel[i]) : "",
         () => {
@@ -155,8 +156,8 @@ export default function Level({ level, answer, setAnswer }) {
           /* BORDER */
           button(
             22,
-            48,
-            48,
+            B,
+            B,
             "pos-4",
             draw_shape(answer.border),
             () => {
