@@ -15,25 +15,29 @@ export default function LevelWrapper({
   user,
   goToEnd,
 }) {
+  let [startTime, setStartTime] = useState(Number(new Date()));
   let [seed, setSeed] = useState(get_seed());
   let [level, setLevel] = useState(levelBuilder(seed));
   let [answer, setAnswer] = useState(shape_empty());
-  let [time, setTime] = useState(0);
 
   useEffect(() => {
     const reboot = getStorage();
-    if (
-      reboot[user] &&
-      reboot[user].actualQuestion &&
-      reboot[user].actualQuestion?.id === id
-    ) {
-      setTime(reboot[user].actualQuestion.time);
+    if (reboot[user]) {
+      if (
+        reboot[user].actualQuestion &&
+        reboot[user].actualQuestion?.id === id
+      ) {
+        setStartTime(reboot[user].actualQuestion.startTime);
+        // setTime(reboot[user].actualQuestion.time);
+      } else {
+        storageAddActualQuestion(user, { id, startTime });
+      }
     }
   }, []);
 
-  useEffect(() => {
-    storageAddActualQuestion(user, { id, time });
-  }, [time]);
+  // useEffect(() => {
+  //   storageAddActualQuestion(user, { id, time });
+  // }, [time]);
 
   async function annotateResponse() {
     const timestamp = Number(new Date());
@@ -84,12 +88,7 @@ export default function LevelWrapper({
 
   return (
     <>
-      <Timer
-        whenAdvance={annotateResponse}
-        time={time}
-        setTime={setTime}
-        max={60}
-      >
+      <Timer whenAdvance={annotateResponse} max={60} startTime={startTime}>
         <Level level={level} answer={answer} setAnswer={setAnswer} />
         <p
           className="bold mt-30"

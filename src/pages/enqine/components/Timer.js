@@ -10,7 +10,7 @@ export default class Timer extends Component {
           "(",
           function () {
             setInterval(function () {
-              postMessage("");
+              postMessage(Number(new Date()));
             }, 1000);
           }.toString(),
           ")()",
@@ -21,12 +21,15 @@ export default class Timer extends Component {
 
     this.worker = new Worker(blobURL);
     URL.revokeObjectURL(blobURL);
+    this.state = {
+      actualTime: Number(new Date()),
+    };
   }
 
   componentDidMount() {
-    this.worker.onmessage = () => {
-      this.props.setTime((time) => time + 1);
-      if (this.props.time >= (this.props.max || 5)) {
+    this.worker.onmessage = ({ data }) => {
+      this.setState({ ...this.state, actualTime: data });
+      if (this.getTime() <= 0) {
         this.worker.terminate();
         this.props.whenAdvance();
       }
@@ -37,10 +40,17 @@ export default class Timer extends Component {
     this.worker.terminate();
   }
 
+  getTime() {
+    return Math.max((
+      this.props.max -
+      Math.floor((this.state.actualTime - this.props.startTime) / 1000)
+    ), 0);
+  }
+
   render() {
     return (
       <>
-        <p>{this.props.max - this.props.time}</p>
+        <p>{this.getTime()}</p>
         {this.props.children}
       </>
     );
