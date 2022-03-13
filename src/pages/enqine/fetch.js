@@ -1,4 +1,4 @@
-const BASE_URL = "http://kindelia.org:8080";
+const BASE_URL = "http://kindelia.org:8000";
 export default function fetchAbsolute(url, { ...options }, ...otherParams) {
   if (options.data) {
     options.body = JSON.stringify({ ...options.data });
