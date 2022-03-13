@@ -7,6 +7,7 @@ import Timer from "../components/Timer";
 import { getStorage, storageAddActualQuestion } from "../utils/storage";
 import { LanguageContext } from "../languages";
 import throttle from "../utils/throttle";
+import { addResult } from "../utils/result";
 
 export default function LevelWrapper({
   whenAdvance,
@@ -58,6 +59,7 @@ export default function LevelWrapper({
         },
       },
     }).catch((err) => {}); // TODO
+    addResult(user, { id, timestamp, seed, answer });
     whenAdvance();
   }
 
