@@ -42,8 +42,31 @@ export default function End({ user }) {
             padding: "5px",
           }}
         >
-          <code style={{ width: "100%" }}>
-            {JSON.stringify(getResult(user))}
+          <code style={{width: "100%", display: "flex", "justify-content": "center" }}>
+            {(function () {
+              var hex = (x, len = 1) => {
+                var str = x.toString(16);
+                while (str.length < len) {
+                  str = "0" + str;
+                }
+                return str;
+              };
+              var lines = [];
+              for (var line of getResult(user)) {
+                var {id, timestamp, seed, answer} = line;
+                var {border, center, clock, wheel} = answer;
+                lines.push([
+                  hex(id, 2),
+                  hex(timestamp, 12),
+                  hex(seed, 8),
+                  hex(border, 1),
+                  hex(center, 1),
+                  clock.map(x => hex(x,1)).join(""),
+                  wheel.map(x => hex(x,1)).join("")
+                ].join("-"));
+              }
+              return lines.join("\n");
+            })()}
           </code>
         </pre>
       </div>
