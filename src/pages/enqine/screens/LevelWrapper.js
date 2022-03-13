@@ -88,7 +88,7 @@ export default function LevelWrapper({
 
   return (
     <>
-      <Timer whenAdvance={annotateResponse} max={60} startTime={startTime}>
+      <Timer whenAdvance={annotateResponse} max={120} startTime={startTime}>
         <Level level={level} answer={answer} setAnswer={setAnswer} />
         <p
           className="bold mt-30"
