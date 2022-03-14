@@ -1,7 +1,7 @@
 {
   "home": {
-    "user": "User",
-    "error": "Could not authenticate this user"
+    "user": "Email",
+    "error": "Could not authenticate this Email"
   },
   "button": {
     "advance": "Next",
@@ -19,27 +19,23 @@
       "advance": "Click 'Next' to see an example."
     },
     "2": {
-      "header": [
-        "Practice drawing any image."
-      ],
-      "footer": [
-        "To draw, click on the buttons above."
-      ]
+      "header": ["Practice drawing any image."],
+      "footer": ["To draw, click on the buttons above."]
     },
     "3": [
       "1. There will be 25 levels.",
-      "2. You will have 1 minute to solve each level.",
-      "3. You can't go back after advancing.",
-      "4. If you get a hard level, press 'Refresh'.",
-      "5. You can refresh as many times as you want; abuse that."
+      "2. You will have 2 minutes to solve each level.",
+      "3. You cannot go back after advancing.",
+      "4. If you get a hard level, press 'Randomize'.",
+      "5. You can refresh as many times as you want!"
     ]
   },
   "level": {
     "warning": "After advancing, you cannot go back!",
-    "refresh": "Refresh",
+    "refresh": "Randomize",
     "wheel": "Dots",
     "clock": "Lines",
     "shape": "Border"
   },
-  "end": "Congrats, you completed the test."
+  "end": "You completed the test."
 }

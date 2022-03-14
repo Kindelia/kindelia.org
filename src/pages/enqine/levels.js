@@ -173,7 +173,7 @@ export const levels = {
       wheel_ang(image, r[0], 1);
     }
     if (x == 1 || x == 2) {
-      wheel_ang(image, r[0] + 1 + r[1], 1);
+      wheel_ang(image, r[0] + 1 + r[1], 3);
     }
   }),
   // ROT

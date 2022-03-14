@@ -1,7 +1,7 @@
 {
   "home": {
-    "user": "Usuário",
-    "error": "Não foi possível autenticar esse usuário"
+    "user": "Email",
+    "error": "Não foi possível autenticar esse Email"
   },
   "button": {
     "advance": "Avançar",
@@ -19,16 +19,12 @@
       "advance": "Clique 'Avançar' para ver um exemplo."
     },
     "2": {
-      "header": [
-        "Pratique desenhando uma imagem qualquer."
-      ],
-      "footer": [
-        "Para desenhar, aperte os botões acima."
-      ]
+      "header": ["Pratique desenhando uma imagem qualquer."],
+      "footer": ["Para desenhar, aperte os botões acima."]
     },
     "3": [
       "1. Ao todo, serão 25 níveis.",
-      "2. Você terá 1 minuto para resolver cada nível.",
+      "2. Você terá 2 minutos para resolver cada nível.",
       "3. Não é possível retornar depois de avançar.",
       "4. Se um nível parecer difícil, aperte 'Randomizar'.",
       "5. Você pode randomizar quantas vezes quiser!"
@@ -41,5 +37,5 @@
     "clock": "Linhas",
     "shape": "Borda"
   },
-  "end": "Parabéns, você concluiu o teste."
+  "end": "Você concluiu o teste."
 }
