@@ -22,6 +22,9 @@ export default function Level({ level, answer, setAnswer }) {
     }
   }
 
+  elems.push(<Line key={"line_"+1} x={0} y={w*0} points={[0, w*1, W, w*1]} stroke="#E0E0E0" />);
+  elems.push(<Line key={"line_"+2} x={0} y={w*0} points={[0, w*2, W, w*2]} stroke="#E0E0E0" />);
+
   function button(font_size, w, h, className, content, click, key) {
     return (
       <button
