@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import RoadGraph from "./pages/roadgraph/Roadgraph";
 import EnQIne from "./pages/enqine/EnQIne";
 import Debug from "./pages/enqine/Debug";
 import Main from "./pages/main/Main";
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Route path="/" element={<Main />} />
       <Route path="/enqine" element={<EnQIne />} />
       <Route path="/enqine/debug" element={<Debug />} />
+      <Route path="/roadgraph" element={<RoadGraph />} />
     </Routes>
   </Router>,
   document.getElementById("root")
