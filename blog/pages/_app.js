@@ -16,14 +16,12 @@ function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Kindelia Blog</title>
+        <title>Kindelia</title>
       </Head>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <GlobalStyles />
         {/* <button onClick={toggleTheme}>Switch Theme</button> */}
-        <Layout theme={theme} whenChooseTheme={toggleTheme}>
-          <Component {...pageProps} />
-        </Layout>
+        <Component {...pageProps} />
       </ThemeProvider>
     </>
   );

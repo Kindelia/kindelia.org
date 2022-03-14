@@ -2,6 +2,8 @@ import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
 import { postFilePaths, POSTS_PATH } from "./mdxUtils";
+import { serialize } from "next-mdx-remote/serialize";
+import rehypePrism from "@mapbox/rehype-prism";
 
 export function getPosts(params) {
   let posts = postFilePaths
@@ -41,4 +43,25 @@ export function getPosts(params) {
   // return { posts, pageQtt };
 
   return posts;
+}
+
+export async function getContent(path_to_file, name) {
+  const postFilePath = path.join(path_to_file, `${name}.mdx`);
+  const source = fs.readFileSync(postFilePath);
+
+  const { content, data } = matter(source);
+
+  const mdxSource = await serialize(content, {
+    scope: data,
+    mdxOptions: {
+      rehypePlugins: [rehypePrism],
+    },
+  });
+
+  return {
+    props: {
+      source: mdxSource,
+      frontMatter: data,
+    },
+  };
 }

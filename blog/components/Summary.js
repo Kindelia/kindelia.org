@@ -10,7 +10,7 @@ const Wrapper = styled.div`
     line-height: 29px;
 
     color: ${({ theme }) => theme.color.primary};
-    
+
     margin-top: 2px;
     margin-bottom: 5px;
     cursor: pointer;
@@ -54,7 +54,7 @@ export default function Summary({ title, link, children, date }) {
   return (
     <Wrapper>
       <span className="summary-date">{date}</span>
-      <Link as={`/${link}`} href="/[slug]">
+      <Link as={`/blog/${link}`} href="/blog/[slug]">
         <div className="summary-title">{title}</div>
       </Link>
       <div className="summary-text">{children}</div>

@@ -1,17 +1,7 @@
-import { getPosts } from "../utils/data";
-import Blog from "../layouts/blog/Blog.js";
+import Main from "../layouts/main/Main";
 
 export default function Index({ posts, params }) {
-  return (
-    <Blog
-      posts={posts}
-    />
-  );
-}
-
-export function getServerSideProps() {
-  const posts = getPosts();
-  return { props: { posts } };
+  return <Main />;
 }
 
 // export function getStaticProps(params) {

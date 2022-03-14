@@ -9,3 +9,5 @@ export const postFilePaths = fs
   .readdirSync(POSTS_PATH)
   // Only include md(x) files
   .filter((path) => /\.mdx?$/.test(path));
+
+export const CONTENT_PATH = path.join(process.cwd(), "content");

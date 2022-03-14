@@ -5,6 +5,8 @@ export const GlobalStyles = createGlobalStyle`
   }
   
   body {
+    margin: 0;
+    padding: 0;
     min-height: calc(100vh - 70px);
     background: ${({ theme }) => theme.background};
     color: ${({ theme }) => theme.color.secondary};
