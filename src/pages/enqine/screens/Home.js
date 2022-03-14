@@ -51,7 +51,7 @@ export default function Home({
   const [showError, setShowError] = useState(false);
   return (
     <>
-      <h1>enQIne</h1>
+      <h1>Kindelia's Test</h1>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div
           style={{

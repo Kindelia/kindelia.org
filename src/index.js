@@ -13,8 +13,8 @@ ReactDOM.render(
   <Router>
     <Routes>
       <Route path="/" element={<Main />} />
-      <Route path="/enqine" element={<EnQIne />} />
-      <Route path="/enqine/debug" element={<Debug />} />
+      <Route path="/test" element={<EnQIne />} />
+      <Route path="/test/debug" element={<Debug />} />
       <Route path="/roadgraph" element={<RoadGraph />} />
     </Routes>
   </Router>,

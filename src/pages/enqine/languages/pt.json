@@ -30,13 +30,13 @@
       "1. Ao todo, serão 30 níveis.",
       "2. Você terá 1 minuto para resolver cada nível.",
       "3. Não é possível retornar depois de avançar.",
-      "4. Se receber um nível difícil, aperte 'Recarregar'.",
-      "5. Você pode recarregar quantas vezes quiser; abuse disso."
+      "4. Se um nível parecer difícil, aperte 'Randomizar'.",
+      "5. Você pode randomizar quantas vezes quiser!"
     ]
   },
   "level": {
     "warning": "Depois de avançar, você não pode retornar!",
-    "refresh": "Recarregar",
+    "refresh": "Randomizar",
     "wheel": "Pontos",
     "clock": "Linhas",
     "shape": "Borda"
