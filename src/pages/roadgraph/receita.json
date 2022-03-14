@@ -1,0 +1,62 @@
+[
+  {
+    "id": "feijao_tropeiro",
+    "estimated": "2020-10-02",
+    "parentIds": [
+      "fritar_carnes",
+      "cozinhar_feijao",
+      "cheiro_verde",
+      "refogado"
+    ]
+  },
+  {
+    "id": "fritar_carnes",
+    "estimated": "2020-10-02",
+    "parentIds": ["picar_bacon", "picar_linguica", "pegar_panelas"]
+  },
+  {
+    "id": "picar_bacon",
+    "estimated": "2020-10-02",
+    "parentIds": []
+  },
+  {
+    "id": "picar_linguica",
+    "estimated": "2020-10-02",
+    "parentIds": []
+  },
+  {
+    "id": "pegar_panelas",
+    "estimated": "2020-10-02",
+    "parentIds": []
+  },
+  {
+    "id": "cozinhar_feijao",
+    "estimated": "2020-10-02",
+    "parentIds": ["catar_feijao", "pegar_panelas"]
+  },
+  {
+    "id": "catar_feijao",
+    "estimated": "2020-10-02",
+    "parentIds": []
+  },
+  {
+    "id": "cheiro_verde",
+    "estimated": "2020-10-02",
+    "parentIds": []
+  },
+  {
+    "id": "refogado",
+    "estimated": "2020-10-02",
+    "parentIds": ["picar_cebola", "amassar_alho", "pegar_panelas"]
+  },
+  {
+    "id": "picar_cebola",
+    "estimated": "2020-10-02",
+    "parentIds": []
+  },
+  {
+    "id": "amassar_alho",
+    "estimated": "2020-10-02",
+    "parentIds": []
+  }
+]
