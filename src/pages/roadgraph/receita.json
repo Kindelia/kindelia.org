@@ -1,62 +1,62 @@
 [
   {
-    "id": "feijao_tropeiro",
-    "estimated": "2020-10-02",
+    "description": "Feijão tropeiro",
+    "id": "0",
     "parentIds": [
-      "fritar_carnes",
-      "cozinhar_feijao",
-      "cheiro_verde",
-      "refogado"
+      "1",
+      "2",
+      "3",
+      "4"
     ]
   },
   {
-    "id": "fritar_carnes",
-    "estimated": "2020-10-02",
-    "parentIds": ["picar_bacon", "picar_linguica", "pegar_panelas"]
+    "description": "Fritar carnes",
+    "id": "1",
+    "parentIds": ["5", "6", "7"]
   },
   {
-    "id": "picar_bacon",
-    "estimated": "2020-10-02",
+    "description": "Picar bacon",
+    "id": "5",
     "parentIds": []
   },
   {
-    "id": "picar_linguica",
-    "estimated": "2020-10-02",
+    "description": "Picar linguiça",
+    "id": "6",
     "parentIds": []
   },
   {
-    "id": "pegar_panelas",
-    "estimated": "2020-10-02",
+    "description": "Pegar panelas",
+    "id": "7",
     "parentIds": []
   },
   {
-    "id": "cozinhar_feijao",
-    "estimated": "2020-10-02",
-    "parentIds": ["catar_feijao", "pegar_panelas"]
+    "description": "Cozinhar feijão",
+    "id": "2",
+    "parentIds": ["8", "7"]
   },
   {
-    "id": "catar_feijao",
-    "estimated": "2020-10-02",
+    "description": "Catar feijão",
+    "id": "8",
     "parentIds": []
   },
   {
-    "id": "cheiro_verde",
-    "estimated": "2020-10-02",
+    "description": "Cheiro verde",
+    "id": "3",
     "parentIds": []
   },
   {
-    "id": "refogado",
-    "estimated": "2020-10-02",
-    "parentIds": ["picar_cebola", "amassar_alho", "pegar_panelas"]
+    "description": "Refogado",
+    "id": "4",
+    "parentIds": ["9", "10", "7"]
   },
   {
-    "id": "picar_cebola",
-    "estimated": "2020-10-02",
+    "description": "Picar cebola",
+    "id": "9",
     "parentIds": []
   },
   {
-    "id": "amassar_alho",
-    "estimated": "2020-10-02",
+    "description": "Amassar alho",
+    "id": "10",
     "parentIds": []
   }
 ]

@@ -7,7 +7,7 @@ import {
   decrossOpt,
   decrossTwoLayer,
 } from "d3-dag";
-import { select, interpolateRainbow, line, curveCatmullRom } from "d3";
+import { select, interpolateCool, line, curveCatmullRom } from "d3";
 import { useEffect } from "react";
 
 export default function RoadGraph() {
@@ -27,7 +27,7 @@ export default function RoadGraph() {
     const defs = svgSelection.append("defs"); // For gradients
 
     const steps = dag.size();
-    const interp = interpolateRainbow;
+    const interp = interpolateCool;
     const colorMap = new Map();
     dag.descendants().forEach((node, i) => {
       colorMap.set(node.data.id, interp(i / steps));
@@ -80,28 +80,34 @@ export default function RoadGraph() {
       .data(dag.descendants())
       .enter()
       .append("g")
-      .attr("transform", ({ x, y }) => `translate(${x}, ${y})`);
+      .attr("transform", ({ x, y }) => `translate(${x}, ${y})`)
+      .style("cursor", "pointer");
 
     // Plot node circles
     nodes
       .append("rect")
-      .attr("width", nodeRadius)
+      .style("width", (d) => d.data.description.length + 2 + "ch")
+      .attr("rx", 10)
+      .attr("ry", 10)
       .attr("height", nodeRadius)
       .attr("fill", (n) => colorMap.get(n.data.id))
-      .attr(
+      .style(
         "transform",
-        ({ x, y }) => `translate(${-(nodeRadius / 2)}, ${-(nodeRadius / 2)})`
+        (d) =>
+          `translate(-${d.data.description.length / 2 + 1}ch, -${
+            nodeRadius / 2
+          }px)`
       );
 
     // Add text to nodes
     nodes
       .append("text")
-      .text((d) => d.data.id)
+      .text((d) => d.data.description)
       .attr("font-weight", "bold")
       .attr("font-family", "sans-serif")
       .attr("text-anchor", "middle")
       .attr("alignment-baseline", "middle")
-      .attr("fill", "black");
+      .attr("fill", "white");
   }, []);
 
   return (
