@@ -2,6 +2,10 @@
   font-family: "Courier New", Courier, monospace;
 }
 
+main.enqine-app {
+  padding: 1em 0 0;
+}
+
 .enqine-app ul,
 ol {
   list-style: none;
@@ -211,4 +215,18 @@ ol {
 }
 .enqine-app .space-y-20 > * + * {
   margin-top: 20px;
+}
+
+/* RESULT */
+
+.enqine-app .result-level-wrapper {
+  display: flex;
+  flex-direction: row;
+  /* align-items: flex-end; */
+  justify-content: flex-end;
+}
+
+.enqine-app .result-level-wrapper .expected-text {
+  width: 33.3%;
+  text-align: center;
 }
