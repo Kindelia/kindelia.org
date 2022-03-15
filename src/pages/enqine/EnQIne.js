@@ -17,6 +17,8 @@ import {
 } from "./screens/Instructions";
 import LevelWrapper from "./screens/LevelWrapper";
 import { LanguageProvider, LanguageSelector } from "./languages/index.js";
+import { getStorage, storageSetUser } from "./utils/storage";
+import fetch from "./fetch";
 
 export default function Enqine() {
   const auth = process.env.REACT_APP_AUTH === "true";
@@ -35,15 +37,38 @@ export default function Enqine() {
     setScreenNumber(screens.length - 1);
   };
 
+  // TODO move this two functions to another place
+  const reboot = () => {
+    const reboot = getStorage();
+    if (reboot[user]) {
+      const data = reboot[user];
+      if (data.endTime) {
+        goToEnd();
+      } else if (data.startTime) {
+        goToLevel(data.actualQuestion.id);
+      } else {
+        advance();
+      }
+    } else {
+      storageSetUser(user);
+      advance();
+    }
+  };
+  const login = async () => {
+    if (auth) {
+      const res = await fetch("/authenticate", {
+        method: "POST",
+        data: {
+          user,
+        },
+      });
+      if (res.status !== 200) throw res.statusText;
+    }
+    reboot();
+  };
+
   const screens = [
-    <Home
-      whenAdvance={advance}
-      goToLevel={goToLevel}
-      goToEnd={goToEnd}
-      user={user}
-      setUser={setUser}
-      auth={auth}
-    />,
+    <Home setUser={setUser} whenLogin={login} />,
     <Instruction1 whenAdvance={advance} />,
     <Instruction2 whenAdvance={advance} />,
     <Instruction3

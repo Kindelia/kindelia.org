@@ -2,7 +2,7 @@ import { Stage, Layer, Line, Rect, Circle } from "react-konva";
 import { useContext } from "react";
 import { LanguageContext } from "../languages";
 
-export default function Level({ level, answer, setAnswer }) {
+export default function Level({ level, answer, setAnswer, hideButtons }) {
   const language = useContext(LanguageContext).dictionary;
 
   var P = 16;
@@ -14,7 +14,7 @@ export default function Level({ level, answer, setAnswer }) {
   var elems = [];
   for (var y = 0; y < 3; ++y) {
     for (var x = 0; x < 3; ++x) {
-      let shape = x !== 2 || y !== 2 ? level[y][x] : answer;
+      let shape = (x !== 2 || y !== 2) ? level[y][x] : answer;
       elems = [
         ...elems,
         draw_board("" + x + y, p + w * x, p + w * y, r, shape),
@@ -139,50 +139,52 @@ export default function Level({ level, answer, setAnswer }) {
   // FIXME TODO: improve this hardcoded monster
   // Ei candidatos, temos aqui o exemplo de um código que vocês NÃO devem escrever
   return (
-    <div>
+    <div className="level-wrapper">
       <Stage width={W} height={W} className="canvas-wrapper">
         <Layer>{elems}</Layer>
       </Stage>
 
-      <div className="canvas-buttons">
-        <span style={{ textAlign: "center" }} className="bold pos-1">
-          {language.level.shape}
-        </span>
-        <span style={{ textAlign: "center" }} className="bold pos-2">
-          {language.level.clock}
-        </span>
-        <span style={{ textAlign: "center" }} className="bold pos-3">
-          {language.level.wheel}
-        </span>
+      {!hideButtons &&
+        <div className="canvas-buttons">
+          <span style={{ textAlign: "center" }} className="bold pos-1">
+            {language.level.shape}
+          </span>
+          <span style={{ textAlign: "center" }} className="bold pos-2">
+            {language.level.clock}
+          </span>
+          <span style={{ textAlign: "center" }} className="bold pos-3">
+            {language.level.wheel}
+          </span>
 
-        {
-          /* BORDER */
-          button(
-            22,
-            B,
-            B,
-            "pos-4",
-            draw_shape(answer.border),
-            () => {
-              setAnswer({ ...answer, border: (answer.border + 1) % 4 });
-            },
-            4
-          )
-        }
-        {/* CENTER */ wheel_button(null, `pos-5`, 5)}
-        {
-          /* CLOCK */
-          Array.from({ length: 8 }, (_, i) =>
-            clock_button(i, `pos-${i + 6}`, i + 6)
-          )
-        }
-        {
-          /* WHEEL */
-          Array.from({ length: 8 }, (_, i) =>
-            wheel_button(i, `pos-${i + 14}`, i + 14)
-          )
-        }
-      </div>
+          {
+            /* BORDER */
+            button(
+              22,
+              B,
+              B,
+              "pos-4",
+              draw_shape(answer.border),
+              () => {
+                setAnswer({ ...answer, border: (answer.border + 1) % 4 });
+              },
+              4
+            )
+          }
+          {/* CENTER */ wheel_button(null, `pos-5`, 5)}
+          {
+            /* CLOCK */
+            Array.from({ length: 8 }, (_, i) =>
+              clock_button(i, `pos-${i + 6}`, i + 6)
+            )
+          }
+          {
+            /* WHEEL */
+            Array.from({ length: 8 }, (_, i) =>
+              wheel_button(i, `pos-${i + 14}`, i + 14)
+            )
+          }
+        </div>
+      }
     </div>
   );
 }
@@ -210,7 +212,7 @@ function line(key, x0, y0, x1, y1) {
   );
 }
 
-function draw_board(key, x, y, rad, board) {
+export function draw_board(key, x, y, rad, board) {
   var elems = [];
 
   // Border diamond

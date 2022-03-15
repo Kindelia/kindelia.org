@@ -5,44 +5,14 @@ import throttle from "../utils/throttle";
 import fetch from "../fetch";
 
 export default function Home({
-  whenAdvance,
-  goToLevel,
-  goToEnd,
-  user,
   setUser,
-  auth,
+  whenLogin,
 }) {
   const language = useContext(LanguageContext).dictionary;
 
-  function reboot() {
-    const reboot = getStorage();
-    if (reboot[user]) {
-      const data = reboot[user];
-      if (data.endTime) {
-        goToEnd();
-      } else if (data.startTime) {
-        goToLevel(data.actualQuestion.id);
-      } else {
-        whenAdvance();
-      }
-    } else {
-      storageSetUser(user);
-      whenAdvance();
-    }
-  }
-
   async function login() {
     try {
-      if (auth) {
-        const res = await fetch("/authenticate", {
-          method: "POST",
-          data: {
-            user,
-          },
-        });
-        if (res.status !== 200) throw res.statusText;
-      }
-      reboot();
+      await whenLogin();
     } catch (err) {
       setShowError(true);
     }
