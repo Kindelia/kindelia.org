@@ -87,10 +87,12 @@ export default function RoadGraph() {
     nodes
       .append("rect")
       .style("width", (d) => d.data.description.length + 2 + "ch")
+      .attr("stroke", (n) => colorMap.get(n.data.id))
+      .attr("stroke-width", "1")
       .attr("rx", 10)
       .attr("ry", 10)
       .attr("height", nodeRadius)
-      .attr("fill", (n) => colorMap.get(n.data.id))
+      .attr("fill", "white")
       .style(
         "transform",
         (d) =>
@@ -104,10 +106,10 @@ export default function RoadGraph() {
       .append("text")
       .text((d) => d.data.description)
       .attr("font-weight", "bold")
-      .attr("font-family", "sans-serif")
+      .attr("font-family", "monospace")
       .attr("text-anchor", "middle")
       .attr("alignment-baseline", "middle")
-      .attr("fill", "white");
+      .attr("fill", "black");
   }, []);
 
   return (
