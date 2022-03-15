@@ -1,0 +1,65 @@
+[
+  {
+    "id": "1",
+    "name": "HVM",
+    "description": "Uma máquina virtual funcional. Usado pelo nó do Kindelia para rodar contratos.",
+    "progress": 1,
+    "date": "2022-12-12",
+    "dependencies": [],
+    "workers": ["Rígille"]
+  },
+  {
+    "id": "2",
+    "name": "Kind2",
+    "description": "Uma linguagem de programação e provas formais. Usada para escrever os contratos que serão usados no Kindelia.",
+    "progress": 0.45,
+    "date": "2022-04-15",
+    "dependencies": ["1"],
+    "workers": ["Maia"]
+  },
+  {
+    "id": "3",
+    "name": "Kind2-HVM-compiler",
+    "description": "Compilador de Kind2 para HVM",
+    "progress": 0,
+    "date": "2022-05-25",
+    "dependencies": ["2"],
+    "workers": []
+  },
+  {
+    "id": "4",
+    "name": "Kindelia",
+    "description": "O nó do Kindelia",
+    "progress": 0,
+    "date": "2022-06-15",
+    "dependencies": ["1"],
+    "workers": []
+  },
+  {
+    "id": "5",
+    "name": "Contratar aprendizes",
+    "description": "",
+    "progress": 0.5,
+    "date": "2022-05-01",
+    "dependencies": [],
+    "workers": ["Maia", "Sipher", "Derenash", "Kelvin", "Rheidner"]
+  },
+  {
+    "id": "6",
+    "name": "Treinar aprendizes",
+    "description": "",
+    "progress": 0,
+    "date": "2022-10-01",
+    "dependencies": ["5", "3"],
+    "workers": []
+  },
+  {
+    "id": "7",
+    "name": "Growth",
+    "description": "",
+    "progress": 0,
+    "date": "",
+    "dependencies": ["6", "4"],
+    "workers": []
+  }
+]

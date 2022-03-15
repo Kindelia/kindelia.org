@@ -1,0 +1,110 @@
+.roadgraph {
+  width: fit-content;
+  margin: auto;
+  transform-origin: 0 0;
+  transform: scale(1.4);
+}
+
+.roadgraph .node-wrapper {
+  position: absolute;
+}
+
+.roadgraph .node-container {
+  background: white;
+  border: 1.5px solid;
+  border-radius: 1px;
+  padding: 2px 5px;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 200ms ease;
+
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.75rem;
+}
+
+.roadgraph .node-container:hover {
+  background: rgb(231, 220, 220);
+}
+
+.roadgraph .node-container progress {
+  max-width: 75px;
+}
+
+.roadgraph .node-container .node-title {
+}
+
+.roadgraph .node-container .node-date {
+  font-size: 0.75em;
+  margin: 5px 0;
+}
+
+.roadgraph-item {
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: max(700px, 100vh);
+
+  font-family: "Courier New", Courier, monospace;
+  padding: 0 20px;
+  margin-top: 100px;
+}
+
+.roadgraph-item .back {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  margin: 10px;
+
+  background: transparent;
+  border: 2px solid black;
+  border-radius: 2px;
+  font-size: 1em;
+  cursor: pointer;
+
+  font-family: "Courier New", Courier, monospace;
+}
+
+.roadgraph-item .info {
+  width: min(900px, 100%);
+}
+
+.roadgraph-item .info > * + * {
+  margin-top: 10px;
+}
+
+.roadgraph-item .name {
+  font-size: 1.5em;
+  border-bottom: 2px solid black;
+  font-weight: bold;
+}
+
+.roadgraph-item .progress-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8em;
+  flex-wrap: wrap;
+}
+
+.roadgraph-item .description {
+  margin: 20px 0;
+  font-size: 0.9em;
+  text-align: justify;
+}
+
+.roadgraph-item .workers {
+  list-style: inside;
+  font-size: .9em;
+}
+
+.roadgraph-item .workers h3 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
