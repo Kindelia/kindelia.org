@@ -23,7 +23,7 @@ export default function RoadgraphItem({
             <progress value={progress * 100} max={100}></progress>{" "}
             {progress * 100}%
           </span>
-          <span>Prazo: {date}</span>
+          {date && <span>Prazo: {date}</span>}
         </div>
         <p className="description">{description}</p>
         {workers.length > 0 && (
