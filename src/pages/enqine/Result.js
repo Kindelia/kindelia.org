@@ -98,7 +98,7 @@ function ResultInfo({ user, result, whenAdvance }) {
           answered
         </p>
         <p>Your avg time is {Math.floor(avg_time / 1000)}s per question </p>
-        <p>{result.refreshs} randomizes were realized in total</p>
+        <p>You have used {result.refreshs} Randomizes in total</p>
       </div>
       <button
         style={{ marginTop: "30px" }}

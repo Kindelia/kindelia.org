@@ -2,7 +2,8 @@ import { Stage, Layer, Line, Rect, Circle } from "react-konva";
 import { useContext } from "react";
 import { LanguageContext } from "../languages";
 
-export default function Level({ level, answer, setAnswer, hideButtons }) {
+export default function Level(
+  { level, answer, setAnswer, hideButtons, showCorrectAnswer }) {
   const language = useContext(LanguageContext).dictionary;
 
   var P = 16;
@@ -14,7 +15,7 @@ export default function Level({ level, answer, setAnswer, hideButtons }) {
   var elems = [];
   for (var y = 0; y < 3; ++y) {
     for (var x = 0; x < 3; ++x) {
-      let shape = (x !== 2 || y !== 2) ? level[y][x] : answer;
+      let shape = (x !== 2 || y !== 2 || showCorrectAnswer) ? level[y][x] : answer;
       elems = [
         ...elems,
         draw_board("" + x + y, p + w * x, p + w * y, r, shape),
