@@ -78,13 +78,7 @@ function SocialIcon({ img, alt, link }) {
             alignItems: "center",
           }}
         >
-          <Image
-            style={{
-              width: "80%",
-            }}
-            src={img}
-            alt={alt}
-          ></Image>
+          <Image width="32px" height="32px" src={img} alt={alt}></Image>
         </div>
       </a>
     </li>

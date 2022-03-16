@@ -11,7 +11,7 @@ import Main from "./pages/main/Main";
 import "./index.css";
 
 ReactDOM.render(
-  <Router>
+  <Router basename="/apps">
     <Routes>
       <Route path="/" element={<Main />} />
       <Route path="/test" element={<EnQIne />} />
