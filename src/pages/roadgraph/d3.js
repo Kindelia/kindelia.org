@@ -2,10 +2,12 @@ import {
   dagStratify,
   sugiyama,
   layeringLongestPath,
-  coordCenter,
+  coordQuad,
   decrossOpt,
 } from "d3-dag";
-import { select, line, curveCatmullRom } from "d3";
+import { select, line, curveCatmullRom, symbol, symbolTriangle } from "d3";
+
+const nodeRadius = 40;
 
 //functions to draw the roadgraph
 export default function drawRoadgraph(data, goToTask) {
@@ -21,10 +23,10 @@ function genDagLayout(data) {
   // Generate dag from data
   const dag = dagStratify().parentIds(({ dependencies }) => dependencies)(data);
   // Generate a layout metadata from dag
-  const nodeRadius = 40;
+
   const layout = sugiyama()
     .layering(layeringLongestPath())
-    .coord(coordCenter())
+    .coord(coordQuad())
     .decross(decrossOpt())
     .nodeSize((node) => [(node ? 3.6 : 0.25) * nodeRadius, 3 * nodeRadius]);
   const { width, height } = layout(dag);
@@ -52,12 +54,42 @@ function getSVG(width, height) {
   return { svg: svgSelection, defs };
 }
 
-function drawEdges(svg, defs, dag) {
+function drawEdges(svg, defs, dag, node) {
   // How to draw edges
   const draw_line = line()
     .curve(curveCatmullRom)
     .x((d) => d.x)
     .y((d) => d.y);
+
+  // Plot arrows
+  const r = nodeRadius / 1.5;
+  const arrowSize = (r * r) / 5.0;
+  const arrowLen = Math.sqrt((4 * arrowSize) / Math.sqrt(3));
+  const arrow = symbol().type(symbolTriangle).size(arrowSize);
+  svg
+    .append("g")
+    .selectAll("path")
+    .data(dag.links())
+    .enter()
+    .append("path")
+    .attr("d", arrow)
+    .attr("transform", ({ source, target, points }) => {
+      const [end, start] = points.slice().reverse();
+      // This sets the arrows the node radius (20) + a little bit (3) away from the node center, on the last line segment of the edge. This means that edges that only span ine level will work perfectly, but if the edge bends, this will be a little off.
+      const dx = start.x - end.x;
+      const dy = start.y - end.y;
+      const proximity = 30;
+      const scale = (proximity * 1.15) / Math.sqrt(dx * dx + dy * dy);
+      // This is the angle of the last line segment
+      const angle = (Math.atan2(-dy, -dx) * 180) / Math.PI + 90;
+      return `translate(${end.x + dx * scale}, ${
+        end.y + dy * scale
+      }) rotate(${angle})`;
+    })
+    .attr("fill", "black")
+    .attr("stroke", "white")
+    .attr("stroke-width", 1.5)
+    .attr("stroke-dasharray", `${arrowLen},${arrowLen}`);
 
   // Plot edges
   svg
