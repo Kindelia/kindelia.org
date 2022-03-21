@@ -13,7 +13,7 @@ import "./index.css";
 ReactDOM.render(
   <Router basename="/apps">
     <Routes>
-      <Route path="/" element={<Main />} />
+      {/* <Route path="/" element={<Main />} /> */}
       <Route path="/test" element={<EnQIne />} />
       <Route path="/test/debug" element={<Debug />} />
       <Route path="/test/result" element={<Result />} />
