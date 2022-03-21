@@ -21,11 +21,11 @@ export default function LevelResult({
   return (
     <>
       <p style={{ marginBottom: "0.5em" }}>
-        Question {level_id} of user {user}
+        Question <strong>{level_id}</strong> of {user}
       </p>
       <p style={{ marginBottom: "0.5em", fontSize: "1.2rem" }}>
-        Answered in {Math.floor(duration / 1000)}s with {refresh || 0}{" "}
-        refresh(s)
+        Answered in <strong>{Math.floor(duration / 1000)}s</strong> with <strong>{refresh || 0}{" "}</strong>
+        randomization{refresh > 1 || !refresh ? "s" : ""}
       </p>
       <div
         style={{

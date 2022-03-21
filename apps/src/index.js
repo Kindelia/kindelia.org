@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Main from "./pages/main/Main";
 import RoadGraph from "./pages/roadgraph/Roadgraph";
 import EnQIne from "./pages/enqine/EnQIne";
 import Debug from "./pages/enqine/Debug";
 import Result from "./pages/enqine/Result";
-import Main from "./pages/main/Main";
 
 import "./index.css";
 

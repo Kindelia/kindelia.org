@@ -70,10 +70,10 @@ function ResultHome({ user, setUser, setResult, whenAdvance }) {
 function ResultInfo({ user, result, whenAdvance }) {
   const answers = Object.values(result.answers);
   console.log(answers);
-  const corrects = answers.filter((item) => item.correct).length;
-  const answered = answers.length;
+  const num_correct = answers.filter((item) => item.correct).length;
+  const num_answered = answers.length;
   const avg_time =
-    answered > 0 ? answers.reduce((a, b) => a + b.duration, 0) / answered : 0;
+    num_answered > 0 ? answers.reduce((a, b) => a + b.duration, 0) / num_answered : 0;
   const duration = result.end ? result.end - result.start : undefined;
 
   return (
@@ -81,24 +81,23 @@ function ResultInfo({ user, result, whenAdvance }) {
       <div className="space-y-20">
         <p>Hi, {user}!</p>
         <p>
-          You started your test at {new Date(result.start).toLocaleString()} and{" "}
+          You started your test at <strong>{new Date(result.start).toLocaleString()}</strong> <br/> and{" "}
           {result.end
-            ? `ended it at ${new Date(result.end).toLocaleString()}`
-            : "didn't finish"}
+            ? <span>ended it at <strong>{new Date(result.end).toLocaleString()}</strong></span>
+            : "didn't finish"}.
         </p>
 
         {result.end && (
           <p>
-            In total you spent {Math.floor(duration / 60000)}m and{" "}
-            {Math.round((duration % 60000) / 1000)}s{" "}
+            In total you spent <strong> {Math.floor(duration / 60000)}m and{" "}
+            {Math.round((duration % 60000) / 1000)}s</strong>.
           </p>
         )}
         <p>
-          You answered correctly {corrects} questions in a total of {answered}{" "}
-          answered
+          You answered correctly <strong class="green">{num_correct}</strong> questions of a total of <strong class="bold">{num_answered}</strong>.
         </p>
-        <p>Your avg time is {Math.floor(avg_time / 1000)}s per question </p>
-        <p>You have used {result.refreshs} Randomizes in total</p>
+        <p>Your average time was <strong>{Math.floor(avg_time / 1000)}s</strong> per question.</p>
+        <p>You have used <strong>{result.refreshs}</strong> Randomizes in total.</p>
       </div>
       <button
         style={{ marginTop: "30px" }}

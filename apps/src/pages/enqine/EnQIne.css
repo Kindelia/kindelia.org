@@ -3,7 +3,6 @@
 }
 
 main.enqine-app {
-  padding: 1em 0 0;
 }
 
 .enqine-app ul,
@@ -11,18 +10,19 @@ ol {
   list-style: none;
 }
 
-.enqine-app {
+main.enqine-app {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: max(100vh, 700px);
+  min-height: min(100vh, 700px);
 
   font-size: 1.5rem;
 
-  padding: 0 20px;
   max-width: 1000px;
   margin: 0 auto;
+  padding: 1em 0 0;
+  /* padding: 0 20px; */
   /* padding-top: 20px; */
 }
 
@@ -78,8 +78,16 @@ ol {
   font-size: 1rem;
 }
 
+.enqine-app strong {
+  font-weight: bold;
+}
+
 .enqine-app .bold {
   font-weight: bold;
+}
+
+.enqine-app .green {
+  color: green;
 }
 
 /* CANVAS */
