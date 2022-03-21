@@ -57,7 +57,7 @@ function ResultHome({ user, setUser, setResult, whenAdvance }) {
     });
     if (res.status !== 200) throw res.statusText;
     const result = await res.json();
-    if (result && result.answers && result.start && result.end) {
+    if (result && result.answers && result.start) {
       setResult(result);
       whenAdvance();
     } else {
