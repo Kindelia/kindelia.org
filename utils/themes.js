@@ -37,12 +37,12 @@ export const GlobalStyles = createGlobalStyle`
 `;
 
 export const lightTheme = {
-  name: 'light',
+  name: "light",
   color: {
-    primary: "#D05270",
-    secondary: "#424242",
+    primary: "black",
+    secondary: "#222222",
     negative: "white",
-    title: "#5E6166",
+    title: "black",
   },
   text: "black",
   background: "white",
@@ -50,7 +50,7 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  name: 'dark',
+  name: "dark",
   color: {
     primary: "#E4E4E4",
     secondary: "#E4E4ff",
