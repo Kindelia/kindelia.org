@@ -15,7 +15,7 @@ const icons = [
   },
   {
     name: "Telegram",
-    link: "https://t.me/formality_lang",
+    link: "https://t.me/kindelia",
     img: telegram_icon,
   },
   {
