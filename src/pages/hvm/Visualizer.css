@@ -1,0 +1,104 @@
+main {
+  height: calc(max(700px, 100vh) - 40px);
+  width: calc(100vw - 60px);
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+
+  font-family: monospace;
+}
+
+main > * + * {
+  margin-left: 20px;
+}
+
+.hvm-debug--text-container {
+  width: 33%;
+  height: calc(100% - 40px);
+
+  font-size: large;
+
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow-x: scroll;
+
+  position: relative;
+}
+
+.hvm-debug--clean-button {
+  position: sticky;
+  bottom: 0;
+  float: right;
+  margin: 5px;
+  font-size: large;
+  font-family: monospace;
+}
+
+.hvm-debug--text-wrapper {
+  border: 2px solid;
+  padding: 5px;
+
+  cursor: pointer;
+  margin-bottom: 20px;
+
+  overflow-x: auto;
+}
+
+textarea {
+  box-sizing: border-box;
+
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  border: 2px solid black;
+  /* border-radius: 20px; */
+
+  outline: none;
+  resize: none;
+
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow-x: scroll;
+}
+
+.hvm-debug--tree-container {
+  width: 50%;
+  position: relative;
+  overflow-x: auto;
+}
+
+.hvm-debug {
+  width: 100%;
+  position: relative;
+
+  margin-top: 40px;
+}
+
+.hvm-debug--pagination {
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #a4a1a5 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #a4a1a5;
+  border-radius: 10px;
+  border: 3px solid #ffffff;
+}

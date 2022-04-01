@@ -9,6 +9,7 @@ import Debug from "./pages/enqine/Debug";
 import Result from "./pages/enqine/Result";
 
 import "./index.css";
+import HVMVisualizer from "./pages/hvm/Visualizer";
 
 ReactDOM.render(
   <Router>
@@ -18,6 +19,7 @@ ReactDOM.render(
       <Route path="/test/debug" element={<Debug />} />
       <Route path="/test/result" element={<Result />} />
       <Route path="/roadgraph" element={<RoadGraph />} />
+      <Route path="/hvm" element={<HVMVisualizer />} />
     </Routes>
   </Router>,
   document.getElementById("root")

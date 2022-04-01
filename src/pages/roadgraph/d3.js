@@ -142,6 +142,7 @@ function drawNodes(div, dag, goToTask) {
     .enter()
     .append("div")
     .style("position", "absolute")
+    .style("color", ({ data }) => (data.here ? "orange" : "black"))
     .style("transform", ({ x, y }) => `translate(${x}px, ${y}px)`)
     .style("cursor", "pointer");
 
