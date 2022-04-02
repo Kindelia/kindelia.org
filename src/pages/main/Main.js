@@ -80,6 +80,14 @@ export default function Main() {
           />
         ))}
       </ul>
+      <br/>
+      <div>We are a group of open-source developers.</div>
+      <div>-----------------------------------------</div>
+      <div>We built <a href="https://github.com/kindelia/HVM" style={{"color":"black"}}>HVM</a>, a fast functional compiler.</div>
+      <div>We created <a href="https://github.com/kindelia/Kind" style={{"color":"black"}}>Kind</a>, a simple proof language.</div>
+      <div>We are building <a href="https://github.com/kindelia/Kindelia" style={{"color":"black"}}>Kindelia</a>, a p2p computer.</div>
+      <div>-----------------------------------------</div>
+      <div>Check <a href="https://github.com/kindelia" style={{"color":"black"}}>our GitHub</a>!</div>
     </main>
   );
 }
