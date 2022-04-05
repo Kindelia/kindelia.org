@@ -60,8 +60,8 @@ function getChildren(term) {
 }
 
 export function clearDraw() {
-  select("#hvm-debug--html").selectAll("div").remove();
-  select("#hvm-debug--svg").selectAll("*").remove();
+  select("#hvm-tree--html").selectAll("div").remove();
+  select("#hvm-tree--svg").selectAll("*").remove();
 }
 
 function getAllTreeNodes(data) {
@@ -114,7 +114,7 @@ export function draw(data) {
     // scroll to here element
     if (data.here) {
       document
-        .querySelector(".hvm-debug--tree-container")
+        .querySelector(".tree-container")
         .scroll({ left: termNode.i * WIDTH, top: 0, behavior: "smooth" });
     }
   }
@@ -160,7 +160,7 @@ export function draw(data) {
   function drawData(data) {
     const nodes = getAllTreeNodes(data);
 
-    select("#hvm-debug--html")
+    select("#hvm-tree--html")
       .selectAll("div")
       .data(nodes)
       .enter()
@@ -176,7 +176,7 @@ export function draw(data) {
       .style("background", "white")
       .each(drawTerm);
 
-    const SVG = select("#hvm-debug--svg")
+    const SVG = select("#hvm-tree--svg")
       .attr("width", WIDTH * data.length)
       .attr("height", HEIGHT)
       .selectAll("path")

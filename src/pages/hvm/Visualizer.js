@@ -1,77 +1,81 @@
-import { clearup } from "@testing-library/react";
 import { useState, useEffect } from "react";
 import { compose } from "../../utils";
 import { clearDraw, draw } from "./draw";
 import { hvmDebugPreParser, hvmDebugParser } from "./parser.ts";
+
 import "./Visualizer.css";
 
-export default function HVMVisualizer({}) {
+export default function HVMVisualizer() {
+  // initial state of component
   const [debugCode, setDebugCode] = useState("");
   const [nodes, setNodes] = useState([]);
-  const [selectedNode, setSelectedNode] = useState(1);
+  const [selectedNode, setSelectedNode] = useState(0);
 
+  // every time `debugCode` changes:
+  // divide text into 'nodes'
   useEffect(() => {
     if (debugCode) {
       setNodes(hvmDebugPreParser(debugCode));
     }
   }, [debugCode]);
 
+  // every time `nodes` and `selectedNodes`changes:
+  // draw the new `selectedNode` of `nodes`
   useEffect(() => {
-    if (debugCode) {
-      compose(draw, hvmDebugParser)(nodes[selectedNode - 1]);
+    if (nodes.length > 0) {
+      const drawTree = compose(draw, hvmDebugParser);
+      drawTree(nodes[selectedNode]);
     }
   }, [selectedNode, nodes]);
 
+  // every time `selectedNode `changes:
+  // scroll to the selected node 
   useEffect(() => {
-    scrollToNodeText();
+    scrollToNode();
   }, [selectedNode]);
 
-  useEffect(() => {
-    window.onkeydown = (e) => {
-      if (e.key === "ArrowRight") controlSelectedNode((a) => a + 1);
-      if (e.key === "ArrowLeft") controlSelectedNode((a) => a - 1);
-    };
-  }, []);
+
 
   return (
-    <main>
-      <section className="hvm-debug--text-container">
-        <TextContainer />
+    <main className="hvm-visualizer">
+      <section className="left-container">
+        <LeftContainer
+          selectedNode={selectedNode}
+          nodes={nodes}
+          whenChange={setDebugCode}
+          whenSelect={setSelectedNode}
+          whenClear={clear}
+        />
       </section>
-      <section className="hvm-debug--tree-container">
-        <div className="hvm-debug--pagination">
-          <Pagination
-            selectedNode={selectedNode}
-            maxNodes={nodes.length}
-            whenBack={() => {
-              controlSelectedNode((a) => a - 1);
-            }}
-            whenAdvance={() => {
-              controlSelectedNode((a) => a + 1);
-            }}
-          />
-        </div>
-        <div className="hvm-debug">
-          <div id="hvm-debug--html"></div>
-          <svg id="hvm-debug--svg"></svg>
+      <section className="tree-container">
+        <Pagination
+          selected={selectedNode}
+          max={nodes.length}
+          whenBack={() => { selectNode((a) => a - 1) }}
+          whenAdvance={() => { selectNode((a) => a + 1) }}
+          whenSelect={v => selectNode(_ => v)}
+        />
+        <div className="hvm-tree">
+          <div id="hvm-tree--html"></div>
+          <svg id="hvm-tree--svg"></svg>
         </div>
       </section>
     </main>
   );
 
-  function controlSelectedNode(operation) {
-    if (debugCode) {
+  function selectNode(operation) {
+    if (nodes.length > 0) {
       const newSelectedNode = operation(selectedNode);
-      if (newSelectedNode >= 1 && newSelectedNode <= nodes.length) {
+      if (newSelectedNode >= 0 && newSelectedNode <= nodes.length - 1) {
         setSelectedNode(newSelectedNode);
       }
     }
   }
 
-  function scrollToNodeText() {
+  function scrollToNode() {
     if (nodes.length > 0) {
       const element = document.querySelector(
-        `#hvm-debug--text-wrapper-${selectedNode}`
+        `#text-wrapper-${selectedNode}`
       );
       element.scrollIntoView({
         behavior: "smooth",
@@ -81,99 +85,81 @@ export default function HVMVisualizer({}) {
     }
   }
 
+  // return everything to initial state
   function clear() {
     setDebugCode("");
     setNodes([]);
-    setSelectedNode(1);
+    setSelectedNode(0);
     clearDraw();
-  }
-
-  function TextContainer() {
-    if (nodes.length > 0)
-      return (
-        <NodesText
-          selectedNode={selectedNode}
-          nodes={nodes}
-          whenClick={(i) => {
-            setSelectedNode(i);
-          }}
-          whenClear={() => clear()}
-        />
-      );
-    else
-      return (
-        <TextArea
-          whenChange={(value) => {
-            setDebugCode(value);
-          }}
-        />
-      );
   }
 }
 
-function NodesText({ nodes, selectedNode, whenClick, whenClear }) {
+// LEFT
+// chooses what to draw in left
+function LeftContainer({ selectedNode, nodes, whenSelect, whenClear, whenChange }) {
+  if (nodes.length > 0)
+    return (
+      <NodeBlocks
+        selectedNode={selectedNode}
+        nodes={nodes}
+        whenClick={(i) => { whenSelect(i) }}
+        whenClear={whenClear}
+      />
+    );
+  else
+    return <TextArea whenChange={whenChange} />;
+}
+
+// draws each text block for each node
+// also draws a clear button
+function NodeBlocks({ nodes, selectedNode, whenClick, whenClear }) {
   return (
     <>
-      {nodes.map((node, i) => (
+      {nodes.map((node, i) =>
         <div
           key={i}
-          className="hvm-debug--text-wrapper"
-          id={`hvm-debug--text-wrapper-${i}`}
+          className="text-wrapper"
+          id={`text-wrapper-${i}`}
+          onClick={() => whenClick(i)}
           style={{
-            borderColor: selectedNode - 1 === i ? "orange" : "black",
+            borderColor: selectedNode === i ? "orange" : "black",
           }}
-          onClick={() => whenClick(i + 1)}
-        >
-          {node}
-        </div>
-      ))}
+        > {node} </div>
+      )}
       <button
-        className="hvm-debug--clear-button"
-        onClick={() => {
-          whenClear();
-        }}
-      >
-        Limpar
-      </button>
+        className="clear-button"
+        onClick={() => { whenClear() }}
+      > Clear </button>
     </>
   );
 }
 
+// draws the text area
 function TextArea({ whenChange }) {
   return (
     <textarea
-      draggable="false"
-      wrap="false"
       placeholder="Paste your debug here..."
       onChange={(e) => whenChange(e.target.value)}
+      draggable="false"
+      wrap="false"
     ></textarea>
   );
 }
 
-function Pagination({ selectedNode, maxNodes, whenAdvance, whenBack }) {
+// RIGHT
+// draws the pagination component
+function Pagination({ selected, max, whenAdvance, whenBack, whenSelect }) {
   return (
-    <>
-      {maxNodes > 0 && (
-        <>
-          <button
-            onClick={() => {
-              whenBack();
-            }}
-          >
-            {"<"}
-          </button>
-          <span>
-            {selectedNode} / {maxNodes}
-          </span>
-          <button
-            onClick={() => {
-              whenAdvance();
-            }}
-          >
-            {">"}
-          </button>
-        </>
-      )}
-    </>
+    // show if there is more than one to show
+    max > 0 && (
+      <div className="pagination">
+        <button onClick={() => { whenBack() }}>{"<"}</button>
+        <span>
+          <input type="number" value={selected} onChange={(e) => { whenSelect(Number(e.target.value)) }} />
+          /{max}
+        </span>
+        <button onClick={() => { whenAdvance() }}>{">"}</button>
+      </div>
+    )
   );
 }
