@@ -54,6 +54,8 @@ export default function HVMVisualizer() {
           whenBack={() => { selectNode((a) => a - 1) }}
           whenAdvance={() => { selectNode((a) => a + 1) }}
           whenSelect={v => selectNode(_ => v)}
+          whenFastAdvance={() => { fastSelectNode(a => a + 1) }}
+          whenFastBack={() => { fastSelectNode(a => a - 1) }}
         />
         <div className="hvm-tree">
           <div id="hvm-tree--html"></div>
@@ -66,10 +68,34 @@ export default function HVMVisualizer() {
   function selectNode(operation) {
     if (nodes.length > 0) {
       const newSelectedNode = operation(selectedNode);
-      if (newSelectedNode >= 0 && newSelectedNode <= nodes.length - 1) {
+      if (isSelectedNodeValid(newSelectedNode, nodes)) {
         setSelectedNode(newSelectedNode);
       }
     }
+  }
+
+  function fastSelectNode(operation) {
+    function removeDolar(code) {
+      return code.replaceAll("$", "");
+    }
+
+    if (nodes.length > 0) {
+      const actualNode = nodes[selectedNode];
+      let newSelectedNode = operation(selectedNode);
+      while (
+        isSelectedNodeValid(newSelectedNode, nodes) &&
+        removeDolar(actualNode) === removeDolar(nodes[newSelectedNode])
+      )
+        newSelectedNode = operation(newSelectedNode);
+      
+      setSelectedNode(
+        Math.max(0, Math.min(newSelectedNode, nodes.length - 1))
+      );
+    }
+  }
+
+  function isSelectedNodeValid(selectedNode, nodes) {
+    return selectedNode >= 0 && selectedNode <= nodes.length - 1;
   }
 
   function scrollToNode() {
@@ -148,17 +174,19 @@ function TextArea({ whenChange }) {
 
 // RIGHT
 // draws the pagination component
-function Pagination({ selected, max, whenAdvance, whenBack, whenSelect }) {
+function Pagination({ selected, max, whenAdvance, whenFastAdvance, whenBack, whenFastBack, whenSelect }) {
   return (
     // show if there is more than one to show
     max > 0 && (
       <div className="pagination">
+        <button onClick={() => { whenFastBack() }}>{"<<"}</button>
         <button onClick={() => { whenBack() }}>{"<"}</button>
         <span>
-          <input type="number" value={selected} onChange={(e) => { whenSelect(Number(e.target.value)) }} />
+          <input type="number" value={selected + 1} onChange={(e) => { whenSelect(Number(e.target.value - 1)) }} />
           /{max}
         </span>
         <button onClick={() => { whenAdvance() }}>{">"}</button>
+        <button onClick={() => { whenFastAdvance() }}>{">>"}</button>
       </div>
     )
   );
