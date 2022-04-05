@@ -14,21 +14,21 @@ const server = express();
 
 redirects.forEach((route) => {
   server.all(`/${route}/`, (req, res) => {
-    res.redirect(`/apps/${route}`);
+    res.redirect(`/tools/${route}`);
   });
 });
 
 server.use(
-  "/apps",
-  favicon(path.join(__dirname, "apps", "build", "favicon.ico"))
+  "/tools",
+  favicon(path.join(__dirname, "tools", "build", "favicon.ico"))
 );
 
 // the __dirname is the current directory from where the script is running
-// server.use("/apps", express.static(path.join(__dirname, "apps")));
-server.use("/apps/", express.static(path.join(__dirname, "apps", "build")));
+// server.use("/tools", express.static(path.join(__dirname, "tools")));
+server.use("/tools/", express.static(path.join(__dirname, "tools", "build")));
 
-server.get(/\/apps\/.+/, function (req, res) {
-  res.sendFile(path.join(__dirname, "apps", "build", "index.html"));
+server.get(/\/tools\/.+/, function (req, res) {
+  res.sendFile(path.join(__dirname, "tools", "build", "index.html"));
 });
 
 app.prepare().then(() => {
