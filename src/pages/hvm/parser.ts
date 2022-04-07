@@ -564,7 +564,7 @@ function hvm_debug_parser_test() {
 
 // UTILS
 // =========
-const sep = "------------------------\n";
+const sep = /--+\n/;
 
 export function sanitize(code: string): string {
   return code
