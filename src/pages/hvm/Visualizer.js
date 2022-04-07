@@ -13,6 +13,7 @@ export default function HVMVisualizer() {
   const [debugCode, setDebugCode] = useState("");
   const [nodes, setNodes] = useState([]);
   const [selectedNode, setSelectedNode] = useState(0);
+  const [error, setError] = useState(null);
 
   // every time `debugCode` changes:
   // divide text into 'nodes'
@@ -26,8 +27,13 @@ export default function HVMVisualizer() {
   // draw the new `selectedNode` of `nodes`
   useEffect(() => {
     if (nodes.length > 0) {
-      const drawTree = compose(draw, hvmDebugParser);
-      drawTree(nodes[selectedNode]);
+      setError(null);
+      try {
+        const drawTree = compose(draw, hvmDebugParser);
+        drawTree(nodes[selectedNode]);
+      } catch (err) {
+        setError(err);
+      }
     }
   }, [selectedNode, nodes]);
 
@@ -45,29 +51,30 @@ export default function HVMVisualizer() {
         <LeftContainer
           selectedNode={selectedNode}
           nodes={nodes}
-          whenChange={(textarea) => {
-            console.log("here");
-            console.log(textarea);
-            setDebugCode(textarea.value);
-          }}
+          whenChange={(textarea) => { setDebugCode(textarea.value) }}
           whenSelect={setSelectedNode}
           whenClear={clear}
         />
       </section>
       <section className="tree-container">
-        <Pagination
-          selected={selectedNode}
-          max={nodes.length}
-          whenBack={() => { selectNode((a) => a - 1) }}
-          whenAdvance={() => { selectNode((a) => a + 1) }}
-          whenSelect={v => selectNode(_ => v)}
-          whenFastAdvance={() => { fastSelectNode(a => a + 1) }}
-          whenFastBack={() => { fastSelectNode(a => a - 1) }}
-        />
-        <div className="hvm-tree">
-          <div id="hvm-tree--html"></div>
-          <svg id="hvm-tree--svg"></svg>
-        </div>
+        {
+          error ? <ErrorMessage message={error} /> :
+            <>
+              <Pagination
+                selected={selectedNode}
+                max={nodes.length}
+                whenBack={() => { selectNode((a) => a - 1) }}
+                whenAdvance={() => { selectNode((a) => a + 1) }}
+                whenSelect={v => selectNode(_ => v)}
+                whenFastAdvance={() => { fastSelectNode(a => a + 1) }}
+                whenFastBack={() => { fastSelectNode(a => a - 1) }}
+              />
+              <div className="hvm-tree">
+                <div id="hvm-tree--html"></div>
+                <svg id="hvm-tree--svg"></svg>
+              </div>
+            </>
+        }
       </section>
     </main>
   );
@@ -123,6 +130,7 @@ export default function HVMVisualizer() {
     setDebugCode("");
     setNodes([]);
     setSelectedNode(0);
+    setError(null);
     clearAll();
   }
 }
@@ -203,4 +211,17 @@ function Pagination({ selected, max, whenAdvance, whenFastAdvance, whenBack, whe
       </div>
     )
   );
+}
+
+function ErrorMessage({ message }) {
+  const [start, rest] = message.split("[4m[31m«");
+  const [err, end] = rest.split("»[0m");
+
+  return (
+    <p className="error-wrapper">
+      {start}
+      <span className="error-text">{err || "a"}</span>
+      {end}
+    </p>
+  )
 }
