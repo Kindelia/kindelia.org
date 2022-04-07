@@ -2,14 +2,7 @@ import {
   select,
   tree,
   hierarchy,
-  term,
-  curveCatmullRom,
-  symbol,
-  symbolTriangle,
   linkVertical,
-  linkHorizontal,
-  linkRadial,
-  easeLinear,
 } from "d3";
 
 const WIDTH = 500;
@@ -76,7 +69,7 @@ function getAllTreeNodes(data) {
     const termTree = tree()
       .size([WIDTH, HEIGHT])
       .separation(function separation(a, b) {
-        return a.parent == b.parent ? 1 : 1;
+        return a.parent === b.parent ? 1 : 1;
       })(hierarchicalTerms);
 
     return termTree.descendants().map((node) => ({ ...node, i }));
