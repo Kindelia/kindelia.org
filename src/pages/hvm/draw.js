@@ -59,6 +59,11 @@ function getChildren(term) {
   }
 }
 
+export function clearAll() {
+  clearDraw();
+  select("#hvm-tree--svg").attr("width", null).attr("height", null).selectAll("*").remove();
+}
+
 export function clearDraw() {
   select("#hvm-tree--html").selectAll("div").remove();
   select("#hvm-tree--svg").selectAll("*").remove();

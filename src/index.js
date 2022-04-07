@@ -19,7 +19,7 @@ ReactDOM.render(
       <Route path="/test/debug" element={<Debug />} />
       <Route path="/test/result" element={<Result />} />
       <Route path="/roadgraph" element={<RoadGraph />} />
-      <Route path="/hvm" element={<HVMVisualizer />} />
+      <Route path="/visualizer" element={<HVMVisualizer />} />
     </Routes>
   </Router>,
   document.getElementById("root")

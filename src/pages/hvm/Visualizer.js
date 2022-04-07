@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { compose } from "../../utils";
-import { clearDraw, draw } from "./draw";
+import { clearAll, draw } from "./draw";
 import { hvmDebugPreParser, hvmDebugParser } from "./parser.ts";
 
 import "./Visualizer.css";
 
 export default function HVMVisualizer() {
+  // const query = useQuery();
+  // const code = b64_to_utf8(query.get("code"));
+
   // initial state of component
   const [debugCode, setDebugCode] = useState("");
   const [nodes, setNodes] = useState([]);
@@ -42,7 +45,11 @@ export default function HVMVisualizer() {
         <LeftContainer
           selectedNode={selectedNode}
           nodes={nodes}
-          whenChange={setDebugCode}
+          whenChange={(textarea) => {
+            console.log("here");
+            console.log(textarea);
+            setDebugCode(textarea.value);
+          }}
           whenSelect={setSelectedNode}
           whenClear={clear}
         />
@@ -87,7 +94,7 @@ export default function HVMVisualizer() {
         removeDolar(actualNode) === removeDolar(nodes[newSelectedNode])
       )
         newSelectedNode = operation(newSelectedNode);
-      
+
       setSelectedNode(
         Math.max(0, Math.min(newSelectedNode, nodes.length - 1))
       );
@@ -116,7 +123,7 @@ export default function HVMVisualizer() {
     setDebugCode("");
     setNodes([]);
     setSelectedNode(0);
-    clearDraw();
+    clearAll();
   }
 }
 
@@ -140,7 +147,7 @@ function LeftContainer({ selectedNode, nodes, whenSelect, whenClear, whenChange 
 // also draws a clear button
 function NodeBlocks({ nodes, selectedNode, whenClick, whenClear }) {
   return (
-    <>
+    <div className="node-blocks">
       {nodes.map((node, i) =>
         <div
           key={i}
@@ -156,19 +163,25 @@ function NodeBlocks({ nodes, selectedNode, whenClick, whenClear }) {
         className="clear-button"
         onClick={() => { whenClear() }}
       > Clear </button>
-    </>
+    </div>
   );
 }
 
 // draws the text area
 function TextArea({ whenChange }) {
+  const textarea = useRef();
+
   return (
-    <textarea
-      placeholder="Paste your debug here..."
-      onChange={(e) => whenChange(e.target.value)}
-      draggable="false"
-      wrap="false"
-    ></textarea>
+    <div className="text-input">
+      <textarea
+        ref={textarea}
+        placeholder="Paste your debug here..."
+        // onChange={(e) => whenChange(textarea)}
+        draggable="false"
+        wrap="false"
+      ></textarea>
+      <button onClick={() => { whenChange(textarea.current) }}>Go</button>
+    </div>
   );
 }
 
