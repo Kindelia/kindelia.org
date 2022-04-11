@@ -19,7 +19,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
+  REPO: ${{ github.repository }}
 
 
 jobs:
@@ -34,6 +34,10 @@ jobs:
       id-token: write
 
     steps:
+      - id: image_name
+        name: image name to lowercase
+        run: INPUT="${{ env.REPO }}"; echo "IMAGE_NAME=${INPUT,,}" >> "$GITHUB_ENV"
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
