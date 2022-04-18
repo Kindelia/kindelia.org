@@ -33,6 +33,14 @@ export default function Main() {
             />
           ))}
         </ul>
+        <br/>
+      <div>We are a group of open-source developers.</div>
+      <div>-----------------------------------------</div>
+      <div>We built <a href="https://github.com/kindelia/HVM" style={{"color":"black"}}>HVM</a>, a fast functional compiler.</div>
+      <div>We created <a href="https://github.com/kindelia/Kind" style={{"color":"black"}}>Kind</a>, a simple proof language.</div>
+      <div>We are building <a href="https://github.com/kindelia/Kindelia" style={{"color":"black"}}>Kindelia</a>, a p2p computer.</div>
+      <div>-----------------------------------------</div>
+      <div>Check <a href="https://github.com/kindelia" style={{"color":"black"}}>our GitHub</a>!</div>
       </Wrapper>
     </>
   );
@@ -46,7 +54,7 @@ const icons = [
   },
   {
     name: "Telegram",
-    link: "https://t.me/formality_lang",
+    link: "https://t.me/kindelia",
     img: telegram_icon,
   },
   {
@@ -78,13 +86,7 @@ function SocialIcon({ img, alt, link }) {
             alignItems: "center",
           }}
         >
-          <Image
-            style={{
-              width: "80%",
-            }}
-            src={img}
-            alt={alt}
-          ></Image>
+          <Image width="32px" height="32px" src={img} alt={alt}></Image>
         </div>
       </a>
     </li>

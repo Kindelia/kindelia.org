@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   & .summary-title {
     font-weight: 600;
     font-size: 1.5rem;
+    text-align: justify;
     line-height: 29px;
 
     color: ${({ theme }) => theme.color.primary};
@@ -22,7 +23,7 @@ const Wrapper = styled.div`
 
   & .summary-text {
     line-height: 20px;
-
+    text-align: justify;
     margin-bottom: 30px;
   }
 

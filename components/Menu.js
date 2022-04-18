@@ -3,10 +3,9 @@ import MenuItem from "./MenuItem";
 
 export default function Menu({ props }) {
   const menu_items = [
-    { text: "Projects", link: "/", mobile: true },
-    { text: "Posts", link: "/blog", mobile: true },
-    { text: "About us", link: "/#about-us", mobile: false },
-    { text: "Contact", link: "/#contact", mobile: false },
+    // { text: "Projects", link: "/", mobile: true },
+    { text: "Blog", link: "/blog", mobile: true },
+    { text: "FAQ", link: "/faq", mobile: true },
   ];
 
   return (

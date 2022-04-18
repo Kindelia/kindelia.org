@@ -2,7 +2,8 @@ import { MDXRemote } from "next-mdx-remote";
 import styled from "styled-components";
 
 const MDXStyle = styled.main`
-  ol, ul {
+  ol,
+  ul {
     list-style: dot;
   }
 
@@ -32,6 +33,7 @@ const MDXStyle = styled.main`
     background-color: rgba(110, 118, 129, 0.2);
     padding: 0 5px;
     border-radius: 5px;
+    overflow-wrap: break-word;
   }
 
   img {
