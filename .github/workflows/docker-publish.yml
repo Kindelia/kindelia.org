@@ -9,7 +9,7 @@ on:
 #   schedule:
 #     - cron: '24 14 * * *'
   push:
-    branches: [ master ]
+    branches: [ master, test ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
@@ -35,7 +35,7 @@ jobs:
 
     steps:
       - id: image_name
-        name: image name to lowercase
+        name: Sets image name to lowercase repo name
         run: INPUT="${{ env.REPO }}"; echo "IMAGE_NAME=${INPUT,,}" >> "$GITHUB_ENV"
 
       - name: Checkout repository
