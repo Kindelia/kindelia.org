@@ -8,4 +8,7 @@ RUN cd ./tools/ && npm install --production && npm run build
 RUN npm install --production
 RUN npm run build
 
-CMD npm run start
+# CMD npm run start
+CMD node ./server.js
+
+EXPOSE 80
